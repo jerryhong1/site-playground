@@ -1,0 +1,35 @@
+@font-face { font-family: neue-haas-display-bold; src: url('../fonts/NHaasGroteskDSPro-65Md.ttf'); }
+@font-face { font-family: neue-haas-display-reg; src: url('../fonts/NHaasGroteskDSPro-55Rg.ttf'); }
+@font-face { font-family: akkurat-mono; src: url('../fonts/Akkurat-Mono.OTF'); }
+
+
+h1 {
+    /* font-family: sans-serif; */
+    font-family: neue-haas-display-bold;
+    letter-spacing: 0.4px;
+    font-size: 40px;
+}
+
+h2{
+    font-family: neue-haas-display-reg;
+    letter-spacing: 1px;
+    font-size: 32px;
+}
+
+p.mono {
+    font-family: akkurat-mono;
+  }
+
+body {
+    background-color: lightgrey;
+    background: linear-gradient(90deg, rgba(223,219,241,1) 0%, rgba(203,214,227,1) 50%, rgba(222,230,214,1) 100%);
+    padding: 24px;
+}
+
+
+canvas {
+    width: 50%;
+    height: 25%;
+    margin-bottom: 16px;
+  }
+  
