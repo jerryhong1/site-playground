@@ -8,16 +8,19 @@ h1 {
     font-family: neue-haas-display-bold;
     letter-spacing: 0.4px;
     font-size: 40px;
+    color: #333;
 }
 
 h2{
     font-family: neue-haas-display-reg;
     letter-spacing: 1px;
     font-size: 32px;
+    color: #333;
 }
 
 p.mono {
     font-family: akkurat-mono;
+    color: #333;
   }
 
 body {

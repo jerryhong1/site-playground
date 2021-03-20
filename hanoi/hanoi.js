@@ -25,7 +25,7 @@ const run = () => {
     const rings = parseInt(prompt("how many rings you idiot"));
     console.log(rings);
     // init a 
-    const numTrials = parseInt(prompt("how many trials (empty for 10000)"));
+    const numTrials = parseInt(prompt("how many trials (empty for 10000)")) || 0;
     console.log(numTrials);
 };
 run();
