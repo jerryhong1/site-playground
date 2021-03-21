@@ -7,20 +7,49 @@ h1 {
     /* font-family: sans-serif; */
     font-family: neue-haas-display-bold;
     letter-spacing: 0.4px;
-    font-size: 40px;
+    font-size: 36px;
     color: #333;
 }
 
 h2{
     font-family: neue-haas-display-reg;
     letter-spacing: 1px;
-    font-size: 32px;
-    color: #333;
+    font-size: 20px;
+    color: black;
+}
+
+div.container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+div.box {
+    width: 90%;
+    border: 2px solid #333;
+    margin-top: 32px;
+    padding: 16px;
+    padding-top: 0px;
+    padding-bottom: 8px;
+    margin-right: 24px;
+    background-color: #FAFAFA;
+}
+
+a {
+    color: #666;
+}
+
+div.setup {
+    width: 90%;
+    padding-top: 8px;
+    margin-right: 16px;
 }
 
 p.mono {
     font-family: akkurat-mono;
     color: #333;
+    max-width: 800px;
+    font-size: 14px;
+    line-height: 130%;
   }
 
 body {
@@ -29,10 +58,22 @@ body {
     padding: 24px;
 }
 
+p {
+    font-family: 'neue-haas-display-reg', sans-serif;
+}
+
 
 canvas {
-    width: 50%;
+    width: 100%;
     height: 25%;
     margin-bottom: 16px;
   }
-  
+
+table {
+    font-family: akkurat-mono;
+    font-size: 12px;
+}
+
+input {
+    margin-right: 8px;s
+}
