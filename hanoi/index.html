@@ -43,7 +43,7 @@
             </p>
             <div class="box">
                 <h2>Let's play a bunch of games.</h2>
-                <p class="mono">First, let's set the number of rings and the number of times we play the game.</p>
+                <p class="mono">First, set the number of rings and the number of times we play the game. We'll save all our results as samples.</p>
                 <p class="mono footnote" style="color: grey">If you choose 5 or more rings, I recommend you set the number of trials 
                 lower by orders of magnitude. (e.g. at most 100 for 8). You can check the console to see the progress.</p>
                 <table id="table">
@@ -158,8 +158,16 @@
                 <p class="mono">
                     Deriving the expected value relies beautifully on the fractal-like structure of the 
                     Markov decision graph (and a little intuition for circuits!). Let's observe how we walk from node to node as we 
-                    simulate a random set of moves with 3 rings.
+                    simulate a random set of moves with 2 rings. Notice that our goal is to reach the bottom two vertices, so take note of when we hit that.
                 </p>
+                <div id="random-walk"></div>
+                <script type='text/javascript'src='randomwalk.js'></script>
+                <p class="mono">
+                    If you understand circuits, something that might jog your inuition: when there are multiple paths from one node to another,
+                    wouldn't you get there faster? Does that remind you intuitively of...equivalent resistance?
+                </p>
+                <p class="mono footnote">Credit again to <a href="https://arxiv.org/pdf/1304.3780.pdf" target="_blank">Alekseyev & Berger (2014)</a>, though
+                one of the states is redundant! Can you catch which one?</p>
             </div> 
         </div>
     </body>
