@@ -37,7 +37,7 @@ function stateToIndex (hanoi) {
       }
     }
   } else {
-    if (state[1].length === 0) {
+    if (state[1].length === 2) {
       return 5
     } else if (state[2].length === 2) {
       return 8
