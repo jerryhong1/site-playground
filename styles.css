@@ -18,6 +18,11 @@ h2{
     color: black;
 }
 
+hr {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
 div.container {
     max-width: 1000px;
     margin: auto;
@@ -44,13 +49,23 @@ div.setup {
     margin-right: 16px;
 }
 
+
+p {
+    font-family: 'neue-haas-display-reg', sans-serif;
+    color: #333;
+}
+
 p.mono {
     font-family: akkurat-mono;
-    color: #333;
     max-width: 800px;
     font-size: 14px;
     line-height: 130%;
   }
+
+p.footnote {
+    font-size: 11px;
+    color: lightgrey;
+}
 
 body {
     background-color: lightgrey;
@@ -58,10 +73,9 @@ body {
     padding: 24px;
 }
 
-p {
+button {
     font-family: 'neue-haas-display-reg', sans-serif;
 }
-
 
 canvas {
     width: 100%;

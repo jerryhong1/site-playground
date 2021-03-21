@@ -150,24 +150,30 @@ const trueExpectedValue = (hanoi) => {
   return (3 ** N - 1) * (5 ** N - 3 ** N) / (4 * 3 ** (N - 1))
 }
 
+// global variable (bad)
+let samples
+
 // set up hanoi tower, run trials, and update the text box.
 function getHanoiSamples (numRings: number, numTrials: number) {
   const hanoi = new Hanoi(numRings)
   console.log(numTrials)
-  const samples = getSamples(hanoi, numTrials)
+  samples = getSamples(hanoi, numTrials)
 
   // samples collected!
   console.log('Expected value estimated', average(samples))
   document.getElementById('sample-status').innerHTML = `Success! After ${numTrials.toString()} random games of 
-    the Tower of Hanoi, the estimated expected number of moves you make is ${average(samples).toFixed(2).toString()}.`
-  console.log('True EV', trueExpectedValue(hanoi))
-  console.log('Variance of our data', sampleVariance(samples))
-  const variances = bootstrapVariance(samples, 100, 100)
-  console.log('Bootstrapped variance', variances)
+  the Tower of Hanoi, the estimated expected number of moves you make is ${average(samples).toFixed(2).toString()}. This should be pretty similar to the closed-form solution:`
+  katex.render(`E(N) = \\frac{(3^N - 1)(5^N - 3^N)}{4 \\cdot 3^{N - 1}} \\approx ${trueExpectedValue(hanoi).toFixed(2).toString()}`, document.getElementById('true-value'))
+  document.getElementById('credit').style.display = 'block'
+  // console.log('True EV', trueExpectedValue(hanoi))
 }
 
 // bootstrap function
-const bootstrapVariance = (samples, nBootstraps, bootSampleSize) => {
+function bootstrapVariance (nBootstraps, bootSampleSize) {
+  if (!samples?.length) {
+    document.getElementById('bootstrap-status').innerHTML = 'Seems like you haven\'t collected your samples yet!'
+    return
+  }
   const resampledVars = []
   for (let i = 0; i < nBootstraps; i++) {
     const newSample = []
@@ -176,7 +182,11 @@ const bootstrapVariance = (samples, nBootstraps, bootSampleSize) => {
     }
     resampledVars.push(sampleVariance(newSample))
   }
-  return resampledVars
+  console.log('Bootstrapped variances', resampledVars)
+  document.getElementById('bootstrap-status').innerHTML = `Nice! Looks like we expect the variance 
+    to be ${average(resampledVars).toFixed(0).toString()}, plus or minus ${Math.sqrt(sampleVariance(resampledVars)).toFixed(0).toString()}.
+    Here's a histogram:`
+  drawHistogram(resampledVars)
 }
 
 // bonus: being able to visually demonstrate all the data: which iteration number, how many steps have been taken, expected value so far, etc.
