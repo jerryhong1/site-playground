@@ -20,15 +20,23 @@ const H = function (x, y, t) {
 // }
 
 let t = 0
+let tStep = 0.25
 
-const run = function () {
+function run () {
   for (let x = 0; x <= 35; x++) {
     for (let y = 0; y <= 35; y++) {
       col(x, y, H(x, y, t), '25%', '85%')
     }
   }
-  t = t + 0.120
+  t = t + tStep
   window.requestAnimationFrame(run)
 }
+
+c.addEventListener('mousedown', () => {
+  tStep = 1
+})
+c.addEventListener('mouseup', () => {
+  tStep = 0.25
+})
 
 run()
