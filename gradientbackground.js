@@ -7,9 +7,12 @@ const col = function (x, y, h, s, l) {
   $.fillStyle = 'hsl(' + h + ',' + s + ',' + l + ')'
   $.fillRect(x, y, 1, 1)
 }
+
 const H = function (x, y, t) {
-  return (Math.abs(100 + 200 * Math.sin((x * x * Math.cos(t / 40) + y * y * Math.sin(t / 30)) / 300)))
+  return (Math.abs(100 + 200 * Math.sin(((x - 10) * (x - 10) * Math.cos(t / 50) + (y - 15) * (y - 15) * Math.sin(t / 30)) / 300)))
 }
+
+// the contours of these form ellipses, with more striation farther from the (x,y) origin. at ~(10, 10) the behavior seems less sharp.
 
 // const G = function (x, y, t) {
 //   return (Math.ceil(50 + 64 * Math.sin((x * x * Math.cos(t / 40) + y * y * Math.sin(t / 30)) / 300)))
@@ -25,7 +28,7 @@ let tStep = 0.25
 function run () {
   for (let x = 0; x <= 35; x++) {
     for (let y = 0; y <= 35; y++) {
-      col(x, y, H(x, y, t), '25%', '85%')
+      col(x, y, H(x, y, t), '30%', '85%')
     }
   }
   t = t + tStep
@@ -38,5 +41,28 @@ c.addEventListener('mousedown', () => {
 c.addEventListener('mouseup', () => {
   tStep = 0.25
 })
+
+const b = document.getElementById('bong')
+const bong = new Audio('bong.mp3')
+b.addEventListener('click', () => {
+  playAudio('bong.mp3')
+})
+
+bong.addEventListener('ended', () => {
+  b.disabled = false
+  tStep = 0.25
+})
+
+function playAudio (url) {
+  if (bong.duration === 0 || bong.paused) {
+    b.disabled = true
+    bong.play()
+    tStep = 5
+    setTimeout(() => { tStep = 1.5 }, 150)
+    setTimeout(() => { tStep = 1 }, 700)
+    setTimeout(() => { tStep = 0.7 }, 1500)
+    setTimeout(() => { tStep = 0.4 }, 2000)
+  }
+}
 
 run()

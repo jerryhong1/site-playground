@@ -59,6 +59,7 @@ p.mono {
     max-width: 800px;
     font-size: 14px;
     line-height: 130%;
+    letter-spacing: -.2px;
   }
 
 p.footnote {
