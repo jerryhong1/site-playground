@@ -2,14 +2,14 @@
 const c = document.getElementById('canv')
 const $ = c.getContext('2d')
 
-const col = function (x, y, h, s, l) {
+const color = function (x, y, h, s, l) {
   // $.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
   $.fillStyle = 'hsl(' + h + ',' + s + ',' + l + ')'
   $.fillRect(x, y, 1, 1)
 }
 
 const H = function (x, y, t) {
-  return (Math.abs(100 + 200 * Math.sin(((x - 10) * (x - 10) * Math.cos(t / 50) + (y - 15) * (y - 15) * Math.sin(t / 30)) / 300)))
+  return (Math.abs(100 + 200 * Math.sin(((x - xOffset) * (x - xOffset) * Math.cos(t / 50) + (y - yOffset) * (y - yOffset) * Math.sin(t / 30)) / 200)))
 }
 
 // the contours of these form ellipses, with more striation farther from the (x,y) origin. at ~(10, 10) the behavior seems less sharp.
@@ -24,11 +24,15 @@ const H = function (x, y, t) {
 
 let t = 0
 let tStep = 0.25
+let xOffset = 0
+let yOffset = 0
+const xPartition = 50
+const yPartition = 50
 
 function run () {
-  for (let x = 0; x <= 35; x++) {
-    for (let y = 0; y <= 35; y++) {
-      col(x, y, H(x, y, t), '30%', '85%')
+  for (let x = 0; x <= xPartition; x++) {
+    for (let y = 0; y <= yPartition; y++) {
+      color(x, y, H(x, y, t), '30%', '85%')
     }
   }
   t = t + tStep
@@ -38,8 +42,24 @@ function run () {
 c.addEventListener('mousedown', () => {
   tStep = 1
 })
+
 c.addEventListener('mouseup', () => {
   tStep = 0.25
+})
+
+c.addEventListener('mousemove', (e) => {
+  const mouseX = e.clientX;
+  const mouseY = e.clientY;
+
+  // Get the position of the target element
+  const targetRect = c.getBoundingClientRect();
+
+  // Calculate the mouse coordinates relative to the target element
+  const relativeX = mouseX - targetRect.left;
+  const relativeY = mouseY - targetRect.top;
+  xOffset = relativeX / xPartition;
+  yOffset = relativeY / yPartition
+  console.log(`x: ${relativeX}, y: ${relativeY}}`)
 })
 
 const b = document.getElementById('bong')

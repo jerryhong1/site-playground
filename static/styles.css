@@ -1,6 +1,6 @@
-@font-face { font-family: neue-haas-display-bold; src: url('../fonts/NHaasGroteskDSPro-65Md.ttf'); }
-@font-face { font-family: neue-haas-display-reg; src: url('../fonts/NHaasGroteskDSPro-55Rg.ttf'); }
-@font-face { font-family: akkurat-mono; src: url('../fonts/Akkurat-Mono.OTF'); }
+@font-face { font-family: neue-haas-display-bold; src: url('fonts/NHaasGroteskDSPro-65Md.ttf'); }
+@font-face { font-family: neue-haas-display-reg; src: url('fonts/NHaasGroteskDSPro-55Rg.ttf'); }
+@font-face { font-family: akkurat-mono; src: url('fonts/Akkurat-Mono.OTF'); }
 
 
 h1 {
