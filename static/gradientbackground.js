@@ -26,8 +26,8 @@ let t = 0
 let tStep = 0.25
 let xOffset = 0
 let yOffset = 0
-const xPartition = 50
-const yPartition = 50
+const xPartition = 100
+const yPartition = 100
 
 function run () {
   for (let x = 0; x <= xPartition; x++) {
@@ -47,7 +47,7 @@ c.addEventListener('mouseup', () => {
   tStep = 0.25
 })
 
-c.addEventListener('mousemove', (e) => {
+window.addEventListener('mousemove', (e) => {
   const mouseX = e.clientX;
   const mouseY = e.clientY;
 
@@ -57,15 +57,16 @@ c.addEventListener('mousemove', (e) => {
   // Calculate the mouse coordinates relative to the target element
   const relativeX = mouseX - targetRect.left;
   const relativeY = mouseY - targetRect.top;
-  xOffset = relativeX / xPartition;
-  yOffset = relativeY / yPartition
+  xOffset = relativeX / xPartition / 2;
+  yOffset = relativeY / yPartition / 2;
   console.log(`x: ${relativeX}, y: ${relativeY}}`)
 })
 
 const b = document.getElementById('bong')
 const bong = new Audio('bong.mp3')
-b.addEventListener('click', () => {
-  playAudio('bong.mp3')
+
+window.addEventListener('click', () => {
+  playBongAndSpeedGradient()
 })
 
 bong.addEventListener('ended', () => {
@@ -73,7 +74,7 @@ bong.addEventListener('ended', () => {
   tStep = 0.25
 })
 
-function playAudio (url) {
+function playBongAndSpeedGradient () {
   if (bong.duration === 0 || bong.paused) {
     b.disabled = true
     bong.play()
@@ -84,5 +85,24 @@ function playAudio (url) {
     setTimeout(() => { tStep = 0.4 }, 2000)
   }
 }
+
+ // Function to add random noise to the canvas
+ function addNoise() {
+  var imageData = $.getImageData(0, 0, c.width, c.height);
+  var data = imageData.data;
+
+  for (var i = 0; i < data.length; i += 4) {
+      // Add random noise to the red, green, and blue channels
+      s = Math.random() * 10
+      data[i] = data[i] + s; // Red channel
+      data[i + 1] = data[i + 1] + s; // Green channel
+      data[i + 2] = data[i + 2] + s; // Blue channel
+      // The alpha channel (data[i + 3]) remains unchanged
+  }
+
+  // Put the modified image data back onto the canvas
+  $.putImageData(imageData, 0, 0);
+}
+
 
 run()
