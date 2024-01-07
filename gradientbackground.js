@@ -65,7 +65,7 @@ window.addEventListener('mousemove', (e) => {
 const b = document.getElementById('bong')
 const bong = new Audio('bong.mp3')
 
-window.addEventListener('click', () => {
+b.addEventListener('click', () => {
   playBongAndSpeedGradient()
 })
 
