@@ -4,15 +4,21 @@
     <head>
         <title>yet another personal website</title> 
         <link rel='stylesheet' type='text/css' href='styles.css'>
-        <script src='https://d3js.org/d3.v5.min.js'></script>
         <link rel='shortcut icon' type='image/x-icon' href='assets/favicon.ico'/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
-    <body>
+    <body class="two-bgs">
         <div class="header">
+          <div class="name-and-nav">
             <h1>Jerry Hong</h1>
+            <div class="nav fade-in-on-load">
+              <button onclick="window.open('https://read.cv/jerry', '_blank')" type="button"><span>CV ↗</span></button>
+              <button class="disabled"><span>Stickies</span></button>
+            </div>
+          </div>
         </div>
-        <div class="main fade-in">
+        <div class="main fade-in-on-load">
           <p class="large" style="max-width: 500px;
           align-self: stretch;">
             I design interfaces and research the AI that will ultimately shape them. 
@@ -23,40 +29,42 @@
           <div class="work-list">
             <div class="work-item">
               <div class="work-title-descr">
-                <h2>Product Design at Airtable</h2>
+                <h2>Product Design <span class="subtle">at </span>
+                  <a class="green" href="https://airtable.com/" target="_blank" rel="noreferrer noopener">Airtable</a>
+                </h2>
                 <p class="small">AI, search, sync.</p>
               </div>
-              <p class="decorative">2022 —     </p>
+              <p class="decorative">2022 —&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
             </div>
             <div class="work-item">
               <div class="work-title-descr">
-                <h2>Researcher at Stanford Vision Lab</h2>
-                <p class="small">Co-first author of “CREPE...”, 
+                <h2>Researcher <span class="subtle">at </span>
+                  <a class="green" href="https://svl.stanford.edu/" target="_blank" rel="noreferrer noopener">Stanford Vision Lab</a>
+                </h2>
+                <p class="small">Co-first author of 
+                  <a href="https://arxiv.org/abs/2212.07796" target="_blank" rel="noreferrer noopener">CREPE</a>, 
                   a highlight in CVPR 2023 (top 2.5%). 
-                  Advised by Ranjay Krishna.</p>
+                  Advised by
+                  <a href="https://ranjaykrishna.com/" target="_blank" rel="noreferrer noopener">Ranjay Krishna</a>.
+                </p>
               </div>
               <p class="decorative">2021 — 2023</p>
             </div>
             <div class="work-item">
               <div class="work-title-descr">
-                <h2>Researcher at Stanford Vision Lab</h2>
-                <p class="small">Co-first author of “CREPE...”, 
-                  a highlight in CVPR 2023 (top 2.5%). 
-                  Advised by Ranjay Krishna.</p>
-              </div>
-              <p class="decorative">2021 — 2023</p>
-            </div>
-            <div class="work-item">
-              <div class="work-title-descr">
-                <h2>Designer Who Codes at Various Startups</h2>
+                <h2>Designer Who Codes <span class="subtle">at </span>
+                  <a class="green" href="http://reduct.video/" target="_blank" rel="noreferrer noopener">Various Startups</a>
+                </h2>
                 <p class="small">Cut my teeth on design systems, 
-                  human-centered AI, automated data viz, and plain old React. .</p>
+                  human-centered AI, automated data viz, and plain old React.</p>
                 </div>
                 <p class="decorative">2020 — 2022</p>
               </div>
               <div class="work-item">
                 <div class="work-title-descr">
-                  <h2>Student at Stanford University</h2>
+                  <h2>Student <span class="subtle">at </span>
+                    <a class="green" href="https://engineering.stanford.edu/students-academics/academics/frederick-emmons-terman-engineering-scholastic-award/terman-awards-0" target="_blank" rel="noreferrer noopener">Stanford University</a>
+                  </h2>
                   <p class="small">M.S. Computer Science, B.S. Mathematics, B.S. Design. 
                     Intervarsity Christian Fellowship, Side by Side...</p>
                 </div>
@@ -72,6 +80,11 @@
             <div class="colorphon-section">
               <h2>Good links™</h2>
               <p class="small">Patrick Fenton • David Kelley • Victor Saad • Betty Wang • Chris Beiser • Max Krieger • Prabhas Pokharel• Robert Ochshorn • Bella You • Oscar Dumlao • Marc Liu • Mika Isayama • ...</p>
+            </div>
+            <div class="colorphon-section">
+              <h2><a class="green" href="https://www.linkedin.com/in/jerryhong1" target="_blank" rel="noreferrer noopener">LinkedIn</a></h2>
+              <h2><a class="green" href="https://twitter.com/jhoer100" target="_blank" rel="noreferrer noopener">Twitter</a></h2>
+              <h2><a class="green" href="mailto:jerryhong1@gmail.com" target="_blank" rel="noreferrer noopener">Email</a></h2>
             </div>
           </div>
         </div>
