@@ -144,6 +144,9 @@ const NAMES =
   {
     name: "Nathan Lee"
   },
+  {
+    name: "Christine Liu"
+  },
 ]
 
 // sort by last name?
@@ -184,6 +187,10 @@ nameDiv.innerHTML = nameHTML
 const FEATURED_LINKS = 
 [
   {
+    title: "Eigenquestions",
+    link: "https://coda.io/@shishir/eigenquestions-the-art-of-framing-problems"
+  },
+  {
     title: "Lingua Franca",
     link: "https://linguafranca.polytopal.ai/"
   },
@@ -198,10 +205,6 @@ const FEATURED_LINKS =
   {
     title: "You and Your Research",
     link: "https://d37ugbyn3rpeym.cloudfront.net/stripe-press/TAODSAE_zine_press.pdf"
-  },
-  {
-    title: "Eigenquestions",
-    link: "https://coda.io/@shishir/eigenquestions-the-art-of-framing-problems"
   },
   {
     title: "The Hidden Melodies of Subways around the World",
@@ -250,6 +253,14 @@ const FEATURED_LINKS =
   {
     title: "Napkin",
     link: "https://web.evanchen.cc/napkin.html"
+  },
+  {
+    title: "The Cab Ride I'll Never Forget",
+    link: "https://kentnerburn.com/the-cab-ride-ill-never-forget/"
+  },
+  {
+    title: "The Emergence of Random Structure",
+    link: "https://www.quantamagazine.org/elegant-six-page-proof-reveals-the-emergence-of-random-structure-20220425/"
   },
   {
     title: "The Weight of Glory",
