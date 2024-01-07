@@ -1,0 +1,373 @@
+@font-face { 
+  font-family: Neue Montreal; 
+  src: url('fonts/NeueMontreal-Regular.otf'); 
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face { 
+  font-family: Neue Montreal; 
+  src: url('fonts/NeueMontreal-Medium.otf'); 
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face { 
+  font-family: Neue Montreal; 
+  src: url('fonts/NeueMontreal-Medium.otf'); 
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face { 
+  font-family: GT Super; 
+  src: url('fonts/GTSuperText-Book.otf'); 
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face { 
+  font-family: JetBrains Mono; 
+  src: url('fonts/JetBrainsMono-Regular.ttf'); 
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face { 
+  font-family: JetBrains Mono; 
+  src: url('fonts/JetBrainsMono-SemiBold.ttf'); 
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* Define the keyframes for the fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in-on-load {
+  opacity: 0; /* Set the initial opacity to 0 */
+  animation: fadeIn .5s ease-in-out forwards; /* Use "forwards" to retain the final state */
+  animation-delay: 0.7s;
+}
+
+@keyframes fadeInBackground {
+  from {
+    background-image: none; /* Initial state: no background image */
+  }
+  to {
+    background-image: url('light.svg'), none; /* SVG as a second background */
+  }
+}
+
+@keyframes sleepBackground {
+  0% {
+    background-color: #687D89;
+  }
+  50% {
+    background-color: #282e31;
+  }
+  100% {
+    background-color: #181d1f;
+  }
+}
+
+@keyframes sleepSVG {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.2;
+  }
+}
+
+
+/* Just for the name */
+h1 {
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Neue Montreal;
+  color: rgba(255, 255, 255, 0.80);
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 30px; /* 136.364% */
+  letter-spacing: 0.5px;
+  margin: 0px;
+}
+
+/* Subheadings, Titles */
+h2{
+  color: rgba(255, 255, 255, 0.7);
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Neue Montreal;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 111.111% */
+  margin: 0px;
+}
+
+/* Long text */
+p.large {
+  color: rgba(255, 255, 255, 0.80);
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: GT Super Text;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 28px; /* 164.706% */
+  letter-spacing: -0.1px;
+  margin: 0px;
+}
+
+p.small {
+  color: rgba(255, 255, 255, 0.5);
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: GT Super Text;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 22px; /* 146.667% */
+  letter-spacing: -0.1px;
+  margin: 0px;
+}
+
+p.decorative {
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: JetBrains Mono;
+  font-family: monospace;
+  color: rgba(255, 255, 255, 0.50);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px; /* 128.571% */
+}
+
+/* Noise */
+body::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('noise.png');
+  opacity: 0.6;
+  background-repeat: repeat;
+  mix-blend-mode: overlay;
+  z-index: -1;
+}
+
+/* Solid background */
+body {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #687D89;
+  animation: sleepBackground 10s linear forwards;
+  animation-delay: 20s;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Light Vector */
+body::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('light.svg'); /* Initial background image */
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0; /* Set the initial opacity to 0 */
+  animation: fadeIn 2s ease forwards, sleepSVG 8s linear forwards; /* Use "forwards" to retain the final state */
+  animation-delay: 1.2s, 20s;
+  z-index: -1;
+}
+
+div.header {
+  display: flex;
+  padding: 16px 40px;
+  align-items: center;
+  gap: 12px;
+  /* align-items: flex-start; */
+  gap: 10px;
+  align-self: stretch;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+div.main {
+  display: flex;
+  padding: 32px 40px 40px 40px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  align-self: stretch;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+}
+
+div.work-list {
+  display: flex;
+  max-width: 500px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  align-self: stretch;
+}
+
+div.work-item {
+  display: flex;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 0px 24px;
+  align-self: stretch;
+  flex-wrap: wrap;
+}
+
+div.work-title-descr {
+  display: flex;
+  min-width: 300px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  flex: 1 0 0;
+}
+
+div.colophon {
+  display: flex;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 24px;
+  align-self: stretch;
+  flex-wrap: wrap;
+}
+
+div.colorphon-section {
+  display: flex;
+  min-width: 300px;
+  max-width: 800px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  flex: 1 0 0;
+}
+
+div.name-and-nav {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  gap: 8px 48px;
+  align-self: stretch;
+  flex: 1 0 0;
+  flex-wrap: wrap;
+}
+
+div.nav {
+  display: flex;
+  min-width: 240px;
+  align-items: flex-start;
+  gap: 4px;
+  
+  /* for left text alignment on wrap: */
+  margin-left: -8px; 
+}
+
+hr {
+  opacity: 0.15;
+  background: #FFF;
+  height: 1px;
+  margin: 0;
+  width: 100%;
+  border-style: outset;
+}
+
+hr.half {
+  max-width: 500px;
+}
+
+a {
+  font-family: Neue Montreal;
+  font-weight: 500;
+  color: inherit;
+  text-decoration: none;
+}
+
+a.green {
+  color: #C6D184;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:after {
+  content: " ↗";
+}
+
+span.subtle {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+::selection {
+  background-color: #C6D184;; 
+  color: #000; 
+}
+
+button {
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: none;
+  border: none;
+}
+
+button span {
+  /* copied from h2 */
+  color: rgba(255, 255, 255, 0.7);
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Neue Montreal;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 111.111% */
+}
+
+button:hover {
+  background: rgba(0, 0, 0, 0.10);
+  cursor: pointer;
+}
+
+button.disabled:hover::before {
+  /* copied from h2 */
+  color: rgba(255, 255, 255, 0.5);
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Neue Montreal;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 111.111% */
+  content: "Still cooking...";
+}
+
+button.disabled:hover {
+  background: none;
+  cursor: default;
+}
+
+button.disabled:hover span {
+  display: none;
+}
