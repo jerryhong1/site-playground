@@ -52,7 +52,7 @@
 
 .fade-in-on-load {
   opacity: 0; /* Set the initial opacity to 0 */
-  animation: fadeIn .5s ease-in-out forwards; /* Use "forwards" to retain the final state */
+  animation: fadeIn .3s ease forwards; /* Use "forwards" to retain the final state */
   animation-delay: 0.7s;
 }
 
@@ -157,7 +157,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('noise.png');
+  background: url('assets/noise.png');
   opacity: 0.6;
   background-repeat: repeat;
   mix-blend-mode: overlay;
@@ -186,7 +186,7 @@ body::after {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('light.svg'); /* Initial background image */
+  background-image: url('assets/light.svg'); /* Initial background image */
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -251,15 +251,15 @@ div.colophon {
   display: flex;
   align-items: flex-start;
   align-content: flex-start;
-  gap: 24px;
+  gap: 32px;
   align-self: stretch;
   flex-wrap: wrap;
 }
 
-div.colorphon-section {
+div.colophon-section {
   display: flex;
   min-width: 300px;
-  max-width: 800px;
+  max-width: 500px;
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
