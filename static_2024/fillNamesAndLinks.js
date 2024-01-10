@@ -147,6 +147,9 @@ const NAMES =
   {
     name: "Christine Liu"
   },
+  {
+    name: "Lily Liu"
+  },
 ]
 
 // sort by last name?

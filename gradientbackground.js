@@ -3,8 +3,7 @@ const c = document.getElementById('canv')
 const $ = c.getContext('2d')
 
 const color = function (x, y, h, s, l) {
-  // $.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
-  $.fillStyle = 'hsl(' + h + ',' + s + ',' + l + ')'
+  $.fillStyle = `hsl(${h}, ${s}, ${l})`
   $.fillRect(x, y, 1, 1)
 }
 
@@ -87,22 +86,22 @@ function playBongAndSpeedGradient () {
 }
 
  // Function to add random noise to the canvas
- function addNoise() {
-  var imageData = $.getImageData(0, 0, c.width, c.height);
-  var data = imageData.data;
+//  function addNoise() {
+//   var imageData = $.getImageData(0, 0, c.width, c.height);
+//   var data = imageData.data;
 
-  for (var i = 0; i < data.length; i += 4) {
-      // Add random noise to the red, green, and blue channels
-      s = Math.random() * 10
-      data[i] = data[i] + s; // Red channel
-      data[i + 1] = data[i + 1] + s; // Green channel
-      data[i + 2] = data[i + 2] + s; // Blue channel
-      // The alpha channel (data[i + 3]) remains unchanged
-  }
+//   for (var i = 0; i < data.length; i += 4) {
+//       // Add random noise to the red, green, and blue channels
+//       s = Math.random() * 10
+//       data[i] = data[i] + s; // Red channel
+//       data[i + 1] = data[i + 1] + s; // Green channel
+//       data[i + 2] = data[i + 2] + s; // Blue channel
+//       // The alpha channel (data[i + 3]) remains unchanged
+//   }
 
-  // Put the modified image data back onto the canvas
-  $.putImageData(imageData, 0, 0);
-}
+//   // Put the modified image data back onto the canvas
+//   $.putImageData(imageData, 0, 0);
+// }
 
 
 run()
