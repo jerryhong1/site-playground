@@ -150,6 +150,10 @@ const NAMES =
   {
     name: "Lily Liu"
   },
+  {
+    name: "Justin Liu",
+    link: "https://jliu.cc/"
+  }
 ]
 
 // sort by last name?
