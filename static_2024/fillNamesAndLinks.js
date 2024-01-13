@@ -153,6 +153,9 @@ const NAMES =
   {
     name: "Justin Liu",
     link: "https://jliu.cc/"
+  },
+  {
+    name: "Krain Chen"
   }
 ]
 
