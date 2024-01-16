@@ -12,7 +12,6 @@ let source;
 let gainNode;
 let rainSound = null;
 let isRainFadingIn = false;
-let buttonDisabled = false;
 const soundButton = document.getElementById('sound-button');
 
 function initAudio() {
@@ -37,11 +36,6 @@ function fadeIn() {
   gainNode.gain.linearRampToValueAtTime(.5, audioContext.currentTime + 5); // Fade-in over 5 seconds
 
   soundButton.innerHTML = `<span>Stop sound</span>`
-  // soundButton.classList.add('disabled');
-  // setTimeout(function() {
-  //   soundButton.innerHTML = `<span>Rain</span>`
-  //   soundButton.classList.remove('disabled');
-  // }, 1000);
 }
 
 const fadeOutTime = 2
@@ -51,11 +45,6 @@ function fadeOut() {
   gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + fadeOutTime ); // Fade-out over 2 seconds
 
   soundButton.innerHTML = `<span>Rain Sound</span>`
-  // soundButton.classList.add('disabled');
-  // setTimeout(function() {
-  //   soundButton.innerHTML = `<span>Rain</span>`
-  //   soundButton.classList.remove('disabled');
-  // }, 1000);
 
   setTimeout(function() {
       if (!isRainFadingIn) {
