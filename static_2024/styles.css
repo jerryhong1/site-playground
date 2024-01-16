@@ -318,8 +318,21 @@ a.green {
 }
 
 a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  border-bottom: 1.5px dotted;
+  background-color: hsla(0,0%,100%,.1);
 }
+
+a.green:hover {
+  text-decoration: none;
+  border-bottom: none;
+  background-color: #C6D184;
+  color: black;
+}
+
+/* a.green:hover::after{
+  content: "! ↗";
+} */
 
 a:after {
   content: " ↗";
