@@ -19,7 +19,7 @@ links.forEach((link) => {
  source.connect(gainNode);
  gainNode.connect(audioContext.destination);
  gainNode.gain.value = 0;
- const playRain = () {
+ const playRain = () => {
   rainSound.play();
   gainNode.gain.linearRampToValueAtTime(1, audioContext.currentTime + 2);
 }
