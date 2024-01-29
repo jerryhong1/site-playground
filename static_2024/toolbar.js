@@ -17,6 +17,7 @@ const soundButton = document.getElementById('sound-button');
 function initAudio() {
   audioContext = new (window.AudioContext || window.webkitAudioContext)();
   rainSound = new Audio('assets/rain.mp3');
+  rainSound.loop = 'true';
   source = audioContext.createMediaElementSource(rainSound);
   gainNode = audioContext.createGain();
   source.connect(gainNode);
@@ -74,16 +75,16 @@ GET TIME
 '. '..7 6 5..' .'
  ~-------------~ 
  ********************/
-function updateCurrentTime() {
+function updateClockTime() {
   var currentTimeElement = document.getElementById('current-time');
   var nyTime = new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York' });
   currentTimeElement.textContent = nyTime;
 }
 // Update the time every second
-setInterval(updateCurrentTime, 1000);
+setInterval(updateClockTime, 1000);
 
 // Initial update
-updateCurrentTime();
+updateClockTime();
 
 
 
@@ -122,7 +123,7 @@ fetchWeather()
 
 
 /**********************
-GET POINTER STATS
+GET STATS
    b.
    88b
    888b.
@@ -133,7 +134,55 @@ GET POINTER STATS
        `8.   
         `8
  ****************/
-let startX, startY;
+// LISTENERS AND STATS 
+const STATS = 
+[
+  {
+    'name': 'Inches traveled',
+    'getValue': () => `${totalDistance.toFixed(2)} in`
+  },
+  {
+    'name': 'Elapsed time',
+    'getValue': () => `${timeElapsed.toFixed(1)} sec`
+  },
+  {
+    'name': 'Pointer speed',
+    'getValue': () => `${currentPointerSpeed.toFixed(2)} in/s`
+  },
+  {
+    'name': 'Average pointer speed',
+    'getValue': () => `${(totalDistance / timeElapsed).toFixed(1)} in/s`
+  },
+  {
+    'name': 'Max pointer speed',
+    'getValue': () => `${maxPointerSpeed.toFixed(2)} in/s`
+  },
+]
+let statIndex = 0;
+let statElement = document.getElementById('cursor-stats');
+statElement.addEventListener('click', () => {
+  statIndex = (statIndex + 1)  % STATS.length;
+  console.log(statIndex)
+})
+
+document.addEventListener('mousemove', (e) => {
+  // update all the variables
+  updateDistance(e.pageX, e.pageY);
+  // then update the relevant HTML canvas
+  document.getElementById('cursor-stats').innerHTML = `<span>${STATS[statIndex].name}: ${STATS[statIndex].getValue()}</span>`
+});
+
+document.addEventListener('touchmove', (e) => {
+    const touch = e.touches[0];
+    if (touch) {
+        updateDistance(touch.pageX, touch.pageY);
+    }
+});
+// lower down, the HTML is also updated over time.
+
+
+// POINTER DISTANCE
+let lastX, lastY;
 let totalDistance = 0;
 
 function calculateDistance(x1, y1, x2, y2) {
@@ -145,22 +194,38 @@ function calculateDistance(x1, y1, x2, y2) {
 }
 
 function updateDistance(x, y) {
-  if (startX !== undefined && startY !== undefined) {
-    const distance = calculateDistance(startX, startY, x, y);
+  if (lastX !== undefined && lastY !== undefined) {
+    const distance = calculateDistance(lastX, lastY, x, y);
     totalDistance += distance;
-    document.getElementById('cursor-stats').innerHTML = `<span>Inches traveled: ${totalDistance.toFixed(2)} in</span>`
   }
-  startX = x;
-  startY = y;
+  lastX = x;
+  lastY = y;
 }
 
-document.addEventListener('mousemove', (e) => {
-    updateDistance(e.pageX, e.pageY);
-});
+// TIME
+let startTime = performance.now();
+let lastDistance = 0;
+let lastXYTime;
+let endTime;
+let timeElapsed; // in seconds
+let currentPointerSpeed = 0;
+let maxPointerSpeed = 0;
+function updateCurrentTime() {
+  endTime = performance.now();
+  timeElapsed = (endTime - startTime) / 1000;
+  document.getElementById('cursor-stats').innerHTML = `<span>${STATS[statIndex].name}: ${STATS[statIndex].getValue()}</span>`
+}
 
-document.addEventListener('touchmove', (e) => {
-    const touch = e.touches[0];
-    if (touch) {
-        updateDistance(touch.pageX, touch.pageY);
-    }
-});
+function updateSpeed() {
+  let time = performance.now();
+  currentPointerSpeed = (totalDistance - lastDistance) / (time - lastXYTime) * 1000;
+  if (currentPointerSpeed) {
+    maxPointerSpeed = Math.max(currentPointerSpeed, maxPointerSpeed);  
+  }
+  lastDistance = totalDistance;
+  lastXYTime = time;
+}
+
+setInterval(updateCurrentTime, 100);
+setInterval(updateSpeed, 100);
+updateCurrentTime();
