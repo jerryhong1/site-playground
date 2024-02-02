@@ -155,7 +155,8 @@ const NAMES =
     link: "https://jliu.cc/"
   },
   {
-    name: "Krain Chen"
+    name: "Krain Chen",
+    link: "https://stanford.edu/~krainc/index.html"
   }
 ]
 
