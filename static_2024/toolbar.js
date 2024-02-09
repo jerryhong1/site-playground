@@ -159,17 +159,21 @@ const STATS =
   },
 ]
 let statIndex = 0;
-let statElement = document.getElementById('cursor-stats');
-statElement.addEventListener('click', () => {
+let incrementStatIndex = () => {
   statIndex = (statIndex + 1)  % STATS.length;
-  console.log(statIndex)
-})
+}
+document.addEventListener('click', (e) => {console.log(e.target);})
+document.getElementById('cursor-stats-clickable').addEventListener('click', incrementStatIndex);
+
+let updateCursorStatsDiv = () => {
+  document.getElementById('cursor-stats-content').innerHTML = `${STATS[statIndex].name}: ${STATS[statIndex].getValue()}`
+}
 
 document.addEventListener('mousemove', (e) => {
   // update all the variables
   updateDistance(e.pageX, e.pageY);
   // then update the relevant HTML canvas
-  document.getElementById('cursor-stats').innerHTML = `<span>${STATS[statIndex].name}: ${STATS[statIndex].getValue()}</span>`
+  updateCursorStatsDiv
 });
 
 document.addEventListener('touchmove', (e) => {
@@ -213,7 +217,7 @@ let maxPointerSpeed = 0;
 function updateCurrentTime() {
   endTime = performance.now();
   timeElapsed = (endTime - startTime) / 1000;
-  document.getElementById('cursor-stats').innerHTML = `<span>${STATS[statIndex].name}: ${STATS[statIndex].getValue()}</span>`
+  updateCursorStatsDiv();
 }
 
 function updateSpeed() {
