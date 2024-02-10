@@ -44,6 +44,10 @@
   font-style: normal;
 }
 
+.ph-bold {
+  font-size: 14px;
+}
+
 /* Define the keyframes for the fade-in animation */
 @keyframes fadeIn {
   from {
@@ -345,6 +349,12 @@ div.toolbar-item span {
 div.toolbar-item, div.disabled span {
   cursor: default;
   color: #777;
+}
+
+div.icon-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 hr {

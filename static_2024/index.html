@@ -2,10 +2,15 @@
     <html>
 
     <head>
-        <title>Jerry Hong</title> 
-        <link rel='stylesheet' type='text/css' href='styles.css'>
-        <link rel='shortcut icon' type='image/x-icon' href='assets/favicon.ico'/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Jerry Hong</title> 
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/bold/style.css"
+      />
+      <link rel='stylesheet' type='text/css' href='styles.css'>
+      <link rel='shortcut icon' type='image/x-icon' href='assets/favicon.ico'/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
     <body class="two-bgs">
@@ -91,8 +96,14 @@
         <div class="toolbar">
           <div class="toolbar-item disabled">
             <span id="current-time">Time</span>
-            <span id="location">New York, NY</span>
-            <span id="current-weather">Weather...</span>
+            <div class="icon-text">
+              <i class="ph-bold ph-navigation-arrow"></i>
+              <span id="location">New York, NY</span>
+            </div>
+            <div class="icon-text" id="current-weather">
+              <i class="ph-bold ph-sun-horizon"></i>
+              <span>Weather...</span>
+            </div>
           </div>
           <div class="toolbar-item" id="cursor-stats"><div id="cursor-stats-clickable"></div> <span id="cursor-stats-content"></span></div>
           <div class="toolbar-item" id="sound-button"><span>Rain sound</span></div>

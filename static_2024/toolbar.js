@@ -100,22 +100,233 @@ GET WEATHER
    '   / `!` \   `
       ;   :   ; 
  ****************/
-function fetchWeather() {
-  return fetch('http://api.weatherapi.com/v1/current.json?key=6ab000ae26124b1a8ea52406241601&q=10009&aqi=no')
-      .then(response => {
-          if (!response.ok) {
-              throw new Error('Network response was not ok');
-          }
-          return response.json();
-      });
-}
 
-fetchWeather()
+// ok terrible idea, i'm going to hard map all the phosphor icons to weather conditions
+// this is taken from https://www.weatherapi.com/docs/weather_conditions.json
+const weatherIconMap = [
+	{
+		"name" : "Sunny",
+		"icon" : "sun"
+	},
+	{
+		"name" : "Clear",
+		"icon" : "moon"
+	},
+	{
+		"name" : "Partly cloudy",
+    "is_day": 1,
+		"icon" : "cloud-sun"
+	},
+  {
+		"name" : "Partly cloudy",
+    "is_day": 0,
+		"icon" : "cloud-moon"
+	},
+	{
+		"name" : "Cloudy",
+		"icon" : "cloud"
+	},
+	{
+		"name" : "Overcast",
+		"icon" : "cloud-fog"
+	},
+	{
+		"name" : "Mist",
+		"icon" : "waves"
+	},
+	{
+		"name" : "Patchy rain possible",
+		"icon" : "cloud-rain"
+	},
+	{
+		"name" : "Patchy snow possible",
+		"icon" : "cloud-snow"
+	},
+	{
+		"name" : "Patchy sleet possible",
+		"icon" : "cloud-snow"
+	},
+	{
+		"name" : "Patchy freezing drizzle possible",
+		"icon" : "cloud-rain"
+	},
+	{
+		"name" : "Thundery outbreaks possible",
+		"icon" : "cloud-lightning"
+	},
+	{
+		"name" : "Blowing snow",
+		"icon" : "cloud-snow"
+	},
+	{
+		"name" : "Blizzard",
+		"icon" : "cloud-snow"
+	},
+	{
+		"name" : "Fog",
+		"icon" : "waves"
+	},
+	{
+		"name" : "Freezing fog",
+		"icon" : "waves"
+	},
+	{
+		"name" : "Patchy light drizzle",
+		"icon" : "cloud-rain"
+	},
+	{
+		"name" : "Light drizzle",
+		"icon" : "cloud-rain"
+	},
+	{
+		"name" : "Freezing drizzle",
+		"icon" : "cloud-rain"
+	},
+	{
+		"name" : "Heavy freezing drizzle",
+		"icon" : "cloud-rain"
+	},
+	{
+		"name" : "Patchy light rain",
+		"icon" : "cloud-rain"
+	},
+	{
+		"name" : "Light rain",
+		"icon" : "cloud-rain"
+	},
+	{
+		"name" : "Moderate rain at times",
+		"icon" : "cloud-rain"
+	},
+	{
+		"name" : "Moderate rain",
+		"icon" : "cloud-rain"
+	},
+	{
+		"name" : "Heavy rain at times",
+		"icon" : "cloud-rain"
+	},
+	{
+		"name" : "Heavy rain",
+		"icon" : "cloud-rain"
+	},
+	{
+		"name" : "Light freezing rain",
+		"icon" : "cloud-rain"
+	},
+  {
+		"name" : "Moderate or heavy freezing rain",
+		"icon" : "cloud-rain"
+	},
+	{
+		"name" : "Light sleet",
+		"icon" : "cloud-snow"
+	},
+	{
+		"name" : "Moderate or heavy sleet",
+		"icon" : "cloud-snow"
+	},
+	{
+		"name" : "Patchy light snow",
+		"icon" : "cloud-snow"
+	},
+	{
+		"name" : "Light snow",
+		"icon" : "cloud-snow"
+	},
+	{
+		"name" : "Patchy moderate snow",
+		"icon" : "cloud-snow"
+	},
+	{
+		"name" : "Moderate snow",
+		"icon" : "cloud-snow"
+	},
+	{
+		"name" : "Patchy heavy snow",
+		"icon" : "cloud-snow"
+	},
+	{
+		"name" : "Heavy snow",
+		"icon" : "cloud-snow"
+	},
+	{
+		"name" : "Ice pellets",
+		"icon" : "cloud-rain"
+	},
+	{
+		"name" : "Light rain shower",
+		"icon" : "cloud-rain"
+	},
+	{
+		"name" : "Moderate or heavy rain shower",
+		"icon" : " cloud-rain"
+	},
+	{
+		"name" : "Torrential rain shower",
+		"icon" : " cloud-rain"
+	},
+	{
+		"name" : "Light sleet showers",
+		"icon" : " cloud-rain"
+	},
+	{
+		"name" : "Moderate or heavy sleet showers",
+		"icon" : " cloud-rain"
+	},
+	{
+		"name" : "Light snow showers",
+		"icon" : " cloud-snow"
+	},
+	{
+		"name" : "Moderate or heavy snow showers",
+		"icon" : "cloud-snow"
+	},
+	{
+		"name" : "Light showers of ice pellets",
+		"icon" : "cloud-snow"
+	},
+	{
+		"name" : "Moderate or heavy showers of ice pellets",
+		"icon" : "cloud-snow"
+	},
+	{
+		"name" : "Patchy light rain with thunder",
+		"icon" : "cloud-lightning"
+	},
+	{
+		"name" : "Moderate or heavy rain with thunder",
+		"icon" : "cloud-lightning"
+	},
+	{
+		"name" : "Patchy light snow with thunder",
+		"icon" : "cloud-lightning"
+	},
+	{
+		"name" : "Moderate or heavy snow with thunder",
+		"icon" : "cloud-lightning"
+	}
+]
+
+fetch('http://api.weatherapi.com/v1/current.json?key=6ab000ae26124b1a8ea52406241601&q=10009&aqi=no')
+  .then(response => {
+      if (!response.ok) {
+          document.getElementById('current-weather').innerHTML = `Weather error`
+          throw new Error('Network response was not ok');
+      }
+      return response.json();
+  })
   .then(data => {
       console.log(data);
       let temp = data.current.temp_f
       let condition = data.current.condition.text
-      document.getElementById('current-weather').innerHTML = `${condition}, ${temp}°F`
+      let iconName = weatherIconMap.find((elt) => {
+        return elt.name.toLowerCase() === condition.toLowerCase() && (elt.is_day === undefined || elt.is_day === data.current.is_day)
+      }).icon;
+      if (iconName === undefined) {
+        iconName = "sun"
+      }
+      document.getElementById('current-weather').innerHTML = `<i class="ph-bold ph-${iconName}"></i> <span>${condition}, ${temp}°F</span>`
   })
   .catch(error => {
       console.error('Error fetching data:', error.message);
