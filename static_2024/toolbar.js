@@ -317,7 +317,6 @@ fetch('https://api.weatherapi.com/v1/current.json?key=6ab000ae26124b1a8ea5240624
       return response.json();
   })
   .then(data => {
-      console.log(data);
       let temp = data.current.temp_f
       let condition = data.current.condition.text
       let iconName = weatherIconMap.find((elt) => {
@@ -403,7 +402,6 @@ let incrementStatIndex = () => {
   statIndex = (statIndex + 1)  % STATS.length;
   updateCursorStatsDiv()
 }
-document.addEventListener('click', (e) => {console.log(e.target);})
 document.getElementById('cursor-stats-clickable').addEventListener('click', incrementStatIndex);
 
 let updateCursorStatsDiv = () => {
@@ -482,7 +480,6 @@ updateCurrentTime();
 let nLinksHovered = 0;
 let nLinksClicked = 0;
 let linkList = document.querySelectorAll('a, .clickable');
-console.log(linkList)
 linkList.forEach((link) => {
   link.addEventListener('mouseenter', (e) => {
     nLinksHovered += 1;
