@@ -352,36 +352,56 @@ const STATS =
     'name': 'Inches traveled',
     'getValue': () => `${totalDistance.toFixed(2)} in`,
     'icon': `<i class="ph-bold ph-ruler"></i>`,
-    'label': ""
+    'label': "",
+    'over_time': false // does this need to be updated every millisecond?
   },
   {
     'name': 'Elapsed time',
     'getValue': () => `${timeElapsed.toFixed(1)} sec`,
     'icon': `<i class="ph-bold ph-timer"></i>`,
-    'label': ""
+    'label': "",
+    'over_time': true 
   },
   {
     'name': 'Pointer speed',
     'getValue': () => `${currentPointerSpeed.toFixed(2)} in/s`,
     'icon': `<i class="ph-bold ph-cursor-click"></i>`,
-    'label': ""
+    'label': "",
+    'over_time': true
   },
   {
     'name': 'Average pointer speed',
     'getValue': () => `${(totalDistance / timeElapsed).toFixed(1)} in/s`,
     'icon': `<i class="ph-bold ph-cursor-click"></i>`,
-    'label': "Avg"
+    'label': "Avg",
+    'over_time': true
   },
   {
     'name': 'Max pointer speed',
     'getValue': () => `${maxPointerSpeed.toFixed(2)} in/s`,
     'icon': `<i class="ph-bold ph-cursor-click"></i>`,
-    'label': "Max"
+    'label': "Max",
+    'over_time': true
   },
+  {
+    'name': 'Clickable elements hovered',
+    'getValue': () => `${nLinksHovered} hovered`,
+    'icon': `<i class="ph-bold ph-link"></i>`,
+    'label': "",
+    'over_time': false
+  },
+  {
+    'name': 'Clickable elements clicked',
+    'getValue': () => `${nLinksClicked} clicked`,
+    'icon': `<i class="ph-bold ph-link"></i>`,
+    'label': "",
+    'over_time': false
+  }
 ]
 let statIndex = 0;
 let incrementStatIndex = () => {
   statIndex = (statIndex + 1)  % STATS.length;
+  updateCursorStatsDiv()
 }
 document.addEventListener('click', (e) => {console.log(e.target);})
 document.getElementById('cursor-stats-clickable').addEventListener('click', incrementStatIndex);
@@ -439,7 +459,9 @@ let maxPointerSpeed = 0;
 function updateCurrentTime() {
   endTime = performance.now();
   timeElapsed = (endTime - startTime) / 1000;
-  updateCursorStatsDiv();
+  if (STATS[statIndex].over_time) {
+    updateCursorStatsDiv();
+  }
 }
 
 function updateSpeed() {
@@ -455,3 +477,22 @@ function updateSpeed() {
 setInterval(updateCurrentTime, 100);
 setInterval(updateSpeed, 100);
 updateCurrentTime();
+
+// NUMBER OF LINKS CLICKED/HOVERED
+let nLinksHovered = 0;
+let nLinksClicked = 0;
+let linkList = document.querySelectorAll('a, .clickable');
+console.log(linkList)
+linkList.forEach((link) => {
+  link.addEventListener('mouseenter', (e) => {
+    nLinksHovered += 1;
+    updateCursorStatsDiv();
+  });
+  link.addEventListener('click', (e) => {
+    nLinksClicked += 1;
+    updateCursorStatsDiv();
+  });
+});
+
+// initial run
+updateCursorStatsDiv()

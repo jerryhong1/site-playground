@@ -338,7 +338,7 @@ div.toolbar-item:hover {
 }
 
 div.toolbar-item span {
-  color: #8E8E8E;
+  color: #AAA;
   font-feature-settings: 'clig' off, 'liga' off;
   font-family: 'JetBrains Mono';
   font-size: 12px;
@@ -348,10 +348,16 @@ div.toolbar-item span {
 }
 
 div.toolbar-item i {
-  color: #8E8E8E;
+  color: #AAA;
 }
 
-div.toolbar-item div.disabled span {
+/* div.toolbar-disabled span div i { */
+div.toolbar-disabled span {
+  cursor: default;
+  color: #777;
+}
+
+div.toolbar-disabled div i {
   cursor: default;
   color: #777;
 }
@@ -360,10 +366,6 @@ div.icon-text {
   display: flex;
   align-items: center;
   gap: 6px;
-}
-
-div.icon-text i {
-  color: #8E8E8E;
 }
 
 hr {

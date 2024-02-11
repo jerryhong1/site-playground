@@ -18,7 +18,7 @@
           <div class="name-and-nav">
             <h1>Jerry Hong</h1>
             <div class="nav fade-in-on-load">
-              <button class = "header" onclick="window.open('https://read.cv/jerry', '_blank')" type="button"><span>CV ↗</span></button>
+              <button class = "header clickable" onclick="window.open('https://read.cv/jerry', '_blank')" type="button"><span>CV ↗</span></button>
               <button class="header disabled"><span>Stickies</span></button>
             </div>
           </div>
@@ -94,7 +94,7 @@
           </div>
         </div>
         <div class="toolbar">
-          <div class="toolbar-item disabled">
+          <div class="toolbar-item toolbar-disabled">
             <span id="current-time">Time</span>
             <div class="icon-text">
               <i class="ph-bold ph-navigation-arrow"></i>
@@ -105,11 +105,11 @@
               <span>Weather...</span>
             </div>
           </div>
-          <div class="toolbar-item" id="cursor-stats">
+          <div class="toolbar-item clickable" id="cursor-stats">
             <div id="cursor-stats-clickable"></div> 
             <div class="icon-text" id="cursor-stats-content"></div>
           </div>
-          <div class="toolbar-item" id="sound-button"><i class="ph-bold ph-speaker-high"></i></div>
+          <div class="toolbar-item clickable" id="sound-button"><i class="ph-bold ph-speaker-high"></i></div>
         </div>
     </body>
     <script type='text/javascript'src='fillNamesAndLinks.js'></script>
