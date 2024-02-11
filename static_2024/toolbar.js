@@ -308,7 +308,7 @@ const weatherIconMap = [
 	}
 ]
 
-fetch('https://api.weatherapi.com/v1/current.json?key=6ab000ae26124b1a8ea52406241601&q=10009&aqi=no')
+fetch('https://api.weatherapi.com/v1/current.json?key=6ab000ae26124b1a8ea52406241601&q=10009&aqi=no&callback=?')
   .then(response => {
       if (!response.ok) {
           document.getElementById('current-weather').innerHTML = `Weather error`
