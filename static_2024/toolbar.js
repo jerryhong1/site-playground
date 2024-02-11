@@ -349,6 +349,13 @@ GET STATS
 const STATS = 
 [
   {
+    'name': 'Pointer speed',
+    'getValue': () => `${currentPointerSpeed.toFixed(2)} in/s`,
+    'icon': `<i class="ph-bold ph-cursor-click"></i>`,
+    'label': "",
+    'over_time': true
+  },
+  {
     'name': 'Inches traveled',
     'getValue': () => `${totalDistance.toFixed(2)} in`,
     'icon': `<i class="ph-bold ph-ruler"></i>`,
@@ -361,13 +368,6 @@ const STATS =
     'icon': `<i class="ph-bold ph-timer"></i>`,
     'label': "",
     'over_time': true 
-  },
-  {
-    'name': 'Pointer speed',
-    'getValue': () => `${currentPointerSpeed.toFixed(2)} in/s`,
-    'icon': `<i class="ph-bold ph-cursor-click"></i>`,
-    'label': "",
-    'over_time': true
   },
   {
     'name': 'Average pointer speed',
