@@ -36,7 +36,7 @@ function fadeIn() {
   isRainFadingIn = true;
   gainNode.gain.linearRampToValueAtTime(.5, audioContext.currentTime + 5); // Fade-in over 5 seconds
 
-  soundButton.innerHTML = `<span>Stop sound</span>`
+  soundButton.innerHTML = `<i class="ph-bold ph-speaker-slash"></i>`
 }
 
 const fadeOutTime = 2
@@ -45,7 +45,7 @@ function fadeOut() {
   gainNode.gain.setValueAtTime(gainNode.gain.value, audioContext.currentTime);
   gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + fadeOutTime ); // Fade-out over 2 seconds
 
-  soundButton.innerHTML = `<span>Rain Sound</span>`
+  soundButton.innerHTML = `<i class="ph-bold ph-speaker-high"></i>`
 
   setTimeout(function() {
       if (!isRainFadingIn) {
@@ -350,23 +350,33 @@ const STATS =
 [
   {
     'name': 'Inches traveled',
-    'getValue': () => `${totalDistance.toFixed(2)} in`
+    'getValue': () => `${totalDistance.toFixed(2)} in`,
+    'icon': `<i class="ph-bold ph-ruler"></i>`,
+    'label': ""
   },
   {
     'name': 'Elapsed time',
-    'getValue': () => `${timeElapsed.toFixed(1)} sec`
+    'getValue': () => `${timeElapsed.toFixed(1)} sec`,
+    'icon': `<i class="ph-bold ph-timer"></i>`,
+    'label': ""
   },
   {
     'name': 'Pointer speed',
-    'getValue': () => `${currentPointerSpeed.toFixed(2)} in/s`
+    'getValue': () => `${currentPointerSpeed.toFixed(2)} in/s`,
+    'icon': `<i class="ph-bold ph-cursor-click"></i>`,
+    'label': ""
   },
   {
     'name': 'Average pointer speed',
-    'getValue': () => `${(totalDistance / timeElapsed).toFixed(1)} in/s`
+    'getValue': () => `${(totalDistance / timeElapsed).toFixed(1)} in/s`,
+    'icon': `<i class="ph-bold ph-cursor-click"></i>`,
+    'label': "Avg"
   },
   {
     'name': 'Max pointer speed',
-    'getValue': () => `${maxPointerSpeed.toFixed(2)} in/s`
+    'getValue': () => `${maxPointerSpeed.toFixed(2)} in/s`,
+    'icon': `<i class="ph-bold ph-cursor-click"></i>`,
+    'label': "Max"
   },
 ]
 let statIndex = 0;
@@ -377,14 +387,15 @@ document.addEventListener('click', (e) => {console.log(e.target);})
 document.getElementById('cursor-stats-clickable').addEventListener('click', incrementStatIndex);
 
 let updateCursorStatsDiv = () => {
-  document.getElementById('cursor-stats-content').innerHTML = `${STATS[statIndex].name}: ${STATS[statIndex].getValue()}`
+  document.getElementById('cursor-stats-content').innerHTML = `
+    ${STATS[statIndex].icon}
+    <span>${STATS[statIndex].label ? `${STATS[statIndex].label}:` : ""} ${STATS[statIndex].getValue()}</span>
+  `
 }
 
-document.addEventListener('mousemove', (e) => {
-  // update all the variables
+document.addEventListener('mousemove', (e) => {  
   updateDistance(e.pageX, e.pageY);
-  // then update the relevant HTML canvas
-  updateCursorStatsDiv
+  updateCursorStatsDiv()
 });
 
 document.addEventListener('touchmove', (e) => {
@@ -417,7 +428,7 @@ function updateDistance(x, y) {
   lastY = y;
 }
 
-// TIME
+// TIME AND SPEED
 let startTime = performance.now();
 let lastDistance = 0;
 let lastXYTime;

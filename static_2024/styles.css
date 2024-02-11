@@ -327,9 +327,10 @@ div.toolbar-item {
   display: flex;
   position: relative; 
   padding: 8px;
-  align-items: flex-start;
+  align-items: center;
   gap: 16px;
   background: rgba(61, 61, 61, 0.40);
+  align-self: stretch;
 }
 
 div.toolbar-item:hover {
@@ -346,7 +347,11 @@ div.toolbar-item span {
   text-transform: uppercase;
 }
 
-div.toolbar-item, div.disabled span {
+div.toolbar-item i {
+  color: #8E8E8E;
+}
+
+div.toolbar-item div.disabled span {
   cursor: default;
   color: #777;
 }
@@ -355,6 +360,10 @@ div.icon-text {
   display: flex;
   align-items: center;
   gap: 6px;
+}
+
+div.icon-text i {
+  color: #8E8E8E;
 }
 
 hr {
