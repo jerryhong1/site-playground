@@ -76,7 +76,7 @@ function fadeIn() {
   isRainFadingIn = true;
   gainNode.gain.linearRampToValueAtTime(.5, audioContext.currentTime + 5); // Fade-in over 5 seconds
 
-  soundButton.innerHTML = `<i class="ph-bold ph-speaker-slash"></i>`
+  soundButton.innerHTML = `<i class="ph-bold ph-pause"></i> <span>Pause</span>`
 }
 
 const fadeOutTime = 2
@@ -85,7 +85,7 @@ function fadeOut() {
   gainNode.gain.setValueAtTime(gainNode.gain.value, audioContext.currentTime);
   gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + fadeOutTime ); // Fade-out over 2 seconds
 
-  soundButton.innerHTML = `<i class="ph-bold ph-speaker-high"></i>`
+  soundButton.innerHTML = `<i class="ph-bold ph-play"></i> <span>Play</span>`
 
   setTimeout(function() {
       if (!isRainFadingIn) {
@@ -532,4 +532,4 @@ linkList.forEach((link) => {
 });
 
 // initial run
-updateCursorStatsDiv()
+updateCursorStatsDiv();
