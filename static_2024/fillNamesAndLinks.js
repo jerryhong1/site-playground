@@ -270,6 +270,10 @@ const FEATURED_LINKS =
     link: "https://kentnerburn.com/the-cab-ride-ill-never-forget/"
   },
   {
+    title: "In Defense of Design Thinking, Which Is Terrible",
+    link: "https://www.subtraction.com/2018/04/02/in-defense-of-design-thinking-which-is-terrible/"
+  },
+  {
     title: "The Emergence of Random Structure",
     link: "https://www.quantamagazine.org/elegant-six-page-proof-reveals-the-emergence-of-random-structure-20220425/"
   },

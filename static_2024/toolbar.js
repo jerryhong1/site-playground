@@ -76,7 +76,7 @@ function fadeIn() {
   isRainFadingIn = true;
   gainNode.gain.linearRampToValueAtTime(.5, audioContext.currentTime + 5); // Fade-in over 5 seconds
 
-  soundButton.innerHTML = `<i class="ph-bold ph-pause"></i> <span>Pause</span>`
+  soundButton.innerHTML = `<i class="ph-bold ph-pause"></i> <span>Rain</span>`
 }
 
 const fadeOutTime = 2
@@ -85,7 +85,7 @@ function fadeOut() {
   gainNode.gain.setValueAtTime(gainNode.gain.value, audioContext.currentTime);
   gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + fadeOutTime ); // Fade-out over 2 seconds
 
-  soundButton.innerHTML = `<i class="ph-bold ph-play"></i> <span>Play</span>`
+  soundButton.innerHTML = `<i class="ph-bold ph-play"></i> <span>Rain</span>`
 
   setTimeout(function() {
       if (!isRainFadingIn) {
@@ -365,7 +365,7 @@ fetch('https://api.weatherapi.com/v1/current.json?key=6ab000ae26124b1a8ea5240624
       if (iconName === undefined) {
         iconName = "sun"
       }
-      document.getElementById('current-weather').innerHTML = `<i class="ph-bold ph-${iconName}"></i> <span>${condition}, ${temp}°F</span>`
+      document.getElementById('current-weather').innerHTML = `<i class="ph-bold ph-${iconName}"></i> <span>${condition}, ${temp.toFixed(0)}°F</span>`
   })
   .catch(error => {
       console.error('Error fetching data:', error.message);
@@ -389,14 +389,14 @@ const STATS =
 [
   {
     'name': 'Pointer speed',
-    'getValue': () => `${currentPointerSpeed.toFixed(2)} in/s`,
+    'getValue': () => `${currentPointerSpeed.toFixed(1)} in/s`,
     'icon': `<i class="ph-bold ph-cursor-click"></i>`,
     'label': "",
     'over_time': true
   },
   {
     'name': 'Inches traveled',
-    'getValue': () => `${totalDistance.toFixed(2)} in`,
+    'getValue': () => `${totalDistance.toFixed(1)} in`,
     'icon': `<i class="ph-bold ph-ruler"></i>`,
     'label': "",
     'over_time': false // does this need to be updated every millisecond?
@@ -417,7 +417,7 @@ const STATS =
   },
   {
     'name': 'Max pointer speed',
-    'getValue': () => `${maxPointerSpeed.toFixed(2)} in/s`,
+    'getValue': () => `${maxPointerSpeed.toFixed(1)} in/s`,
     'icon': `<i class="ph-bold ph-cursor-click"></i>`,
     'label': "Max",
     'over_time': true
@@ -533,3 +533,84 @@ linkList.forEach((link) => {
 
 // initial run
 updateCursorStatsDiv();
+
+
+
+
+
+
+
+
+
+/******
+RANDOM WEBPAGE
+ _       _                       _   
+(_)     | |                     | |  
+ _ _ __ | |_ ___ _ __ _ __   ___| |_ 
+| | '_ \| __/ _ \ '__| '_ \ / _ \ __|
+| | | | | ||  __/ |  | | | |  __/ |_ 
+|_|_| |_|\__\___|_|  |_| |_|\___|\__|
+                                     
+                                     
+ */
+
+let LINKS = 
+[
+  'https://www.youtube.com/watch?v=kMJCN_enTIg',
+  'https://thatsmathematics.com/mathgen/',
+  'https://www.youtube.com/watch?v=3GNG12g2bKw',
+  'https://www.youtube.com/watch?v=KPeYYXDxyUg',
+  'https://www.youtube.com/watch?v=wO61D9x6lNY',
+  'https://www.youtube.com/watch?v=n_n8toR4Bxo',
+  'https://www.youtube.com/watch?v=_o7qjN3KF8U',
+  'https://xkcd.com/1110/',
+  'https://en.wikipedia.org/wiki/List_of_common_misconceptions?useskin=vector',
+  'https://www.mezzacotta.net/garfield/?comic=3751',
+  'https://omauk.bandcamp.com/album/mf-doom-instrumentals-live-at-the-hip-hop-chip-shop-2023',
+  'https://vimeo.com/220328022',
+  'http://blackpeopleloveus.com/index.html',
+  'https://www.subtraction.com/2018/04/02/in-defense-of-design-thinking-which-is-terrible/',
+  'https://fermatslibrary.com/s/the-mundanity-of-excellence-an-ethnographic-report-on-stratification-and-olympic-swimmers',
+  'https://we-b.site/',
+  'https://www.thispersondoesnotexist.com/',
+  'https://www.pavley.com/2020/02/20/no-modes/',
+  'https://accidental-friction-435.notion.site/A-Pattern-Language-for-Interfaces-c2f88d6b16d84293995c006042e79d88',
+  'https://y-n10.com/',
+  'https://juicybeast.com/2017/02/09/all-the-tools-we-use-to-make-games/',
+  'https://vimeo.com/115154289',
+  'https://mollymielke.notion.site/Computing-History-Hub-be72f307fc2e4b05abe3dc67eb937521',
+  'http://www.artypapers.com/essay/imagination/',
+  'https://thesephist.com/posts/materials/',
+  'https://frankchimero.com/blog/2015/the-webs-grain/',
+  'https://daverupert.com/2020/01/the-web-is-industrialized-and-i-helped-industrialize-it/',
+  'http://imagineallthepeople.info/Munari-1966-Design-as-art.pdf',
+  'https://rsms.me/work/figma/',
+  'https://refresh.study/',
+  'https://rauterberg.employee.id.tue.nl/lecturenotes/APPLE-Guidelines-2005.pdf',
+  'https://www.youtube.com/watch?v=70ML-MPjvNY',
+  'https://www.youtube.com/watch?v=RhjHAPw1q-M&list=FLKu9xHeDm5P0zEQU2C8YSpQ',
+  'https://www.youtube.com/watch?v=ci2bFFGM8T8',
+  'https://www.youtube.com/watch?v=rzLIUgnKY40',
+  'https://www.youtube.com/watch?v=SUtXMRuhQcM',
+  'https://www.youtube.com/watch?v=pp8vIJhwESw',
+  'https://www.youtube.com/watch?v=kJ20nm_g3Uc',
+  'https://www.youtube.com/watch?v=dNJdJIwCF_Y',
+  'https://www.youtube.com/watch?v=oUtSlfJ4SMs',
+  'https://mathigon.org/course/circles/spheres-cones-cylinders#sphere-maps',
+  'https://symphosizer.wearecollins.com/',
+  'https://seventeenpeople.com/',
+  'https://deck-24abcd.netlify.app/',
+  'https://tixy.land/',
+  'http://www.radicalcartography.net/',
+  'https://reciprocal.ltd/',
+  'https://gordonbrander.com/pattern/',
+  'https://www.ogilvy.com/work/no-need-fly',
+  'https://www.dimensions.com/'
+]
+let NUMS = ['one', 'two', 'three', 'four', 'five', 'six']
+document.getElementById('random-link').addEventListener('click', (e) => {
+  window.open(LINKS[Math.floor(Math.random()*LINKS.length)], '_blank');
+  document.getElementById('random-link').innerHTML = `<i class="ph-bold ph-dice-${NUMS[Math.floor(Math.random()*NUMS.length)]}"></i>`
+});
+
+document.getElementById('random-link').innerHTML = `<i class="ph-bold ph-dice-${NUMS[Math.floor(Math.random()*NUMS.length)]}"></i>`
