@@ -2,7 +2,7 @@ const hoverSound = new Audio('assets/hover.ogg')
 hoverSound.volume = .6;
 
 // var links = document.querySelectorAll('.hover-link');
-var links = document.querySelectorAll('a');
+var links = document.querySelectorAll('a, .clickable-with-sound');
 const playSound = () => {
   hoverSound.play();
 }

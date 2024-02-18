@@ -605,12 +605,16 @@ let LINKS =
   'https://reciprocal.ltd/',
   'https://gordonbrander.com/pattern/',
   'https://www.ogilvy.com/work/no-need-fly',
-  'https://www.dimensions.com/'
+  'https://www.dimensions.com/',
+  'https://ninja-muffin24.itch.io/funkin',
 ]
 let NUMS = ['one', 'two', 'three', 'four', 'five', 'six']
 document.getElementById('random-link').addEventListener('click', (e) => {
   window.open(LINKS[Math.floor(Math.random()*LINKS.length)], '_blank');
   document.getElementById('random-link').innerHTML = `<i class="ph-bold ph-dice-${NUMS[Math.floor(Math.random()*NUMS.length)]}"></i>`
+  document.getElementById('random-link').innerHTML = `<div class="icon-text" >
+    <i class="ph-bold ph-dice-${NUMS[Math.floor(Math.random()*NUMS.length)]}"></i> 
+  </div>`
 });
 
 document.getElementById('random-link').innerHTML = `<i class="ph-bold ph-dice-${NUMS[Math.floor(Math.random()*NUMS.length)]}"></i>`
