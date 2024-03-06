@@ -550,8 +550,7 @@ RANDOM WEBPAGE
 | | '_ \| __/ _ \ '__| '_ \ / _ \ __|
 | | | | | ||  __/ |  | | | |  __/ |_ 
 |_|_| |_|\__\___|_|  |_| |_|\___|\__|
-                                     
-                                     
+                                  
  */
 
 let LINKS = 
@@ -607,14 +606,35 @@ let LINKS =
   'https://www.ogilvy.com/work/no-need-fly',
   'https://www.dimensions.com/',
   'https://ninja-muffin24.itch.io/funkin',
+  'https://www.youtube.com/watch?v=Z7ioqD4ugh8',
+  'https://www.space.com/26604-apollo-11-failure-nixon-speech.html',
+  'https://improbable.com/ig/ig-pastwinners.html',
+  'https://www.theosthinktank.co.uk/',
+  'https://outofcontextarthur.tumblr.com/tagged/classic%20hits',
+  'https://liturgies.nyc/A-Liturgy-for-Those-Falling-Asleep',
+  'https://www.openculture.com/2019/06/the-us-government-commissioned-7500-watercolor-paintings.html',
+  'http://weavesilk.com/',
+  'https://www.businessinsider.com/the-hedge-fund-presentation-on-olive-garden-is-a-masterpiece-2014-9',
+  'https://imgur.com/gallery/bCqRp',
+  'https://plink.in/'
 ]
 let NUMS = ['one', 'two', 'three', 'four', 'five', 'six']
+let current_link_index = Math.floor(Math.random()*LINKS.length)
 document.getElementById('random-link').addEventListener('click', (e) => {
-  window.open(LINKS[Math.floor(Math.random()*LINKS.length)], '_blank');
-  document.getElementById('random-link').innerHTML = `<i class="ph-bold ph-dice-${NUMS[Math.floor(Math.random()*NUMS.length)]}"></i>`
+  let new_link_index = Math.floor(Math.random()*LINKS.length)
+  while (new_link_index == current_link_index) {
+    new_link_index = Math.floor(Math.random()*LINKS.length)
+  }
+  window.open(LINKS[new_link_index], '_blank');
+  current_link_index = new_link_index;
+  
   document.getElementById('random-link').innerHTML = `<div class="icon-text" >
-    <i class="ph-bold ph-dice-${NUMS[Math.floor(Math.random()*NUMS.length)]}"></i> 
+    <i class="ph-bold ph-dice-${NUMS[current_link_index % NUMS.length]}"></i> 
+    <span>Roll again?</span>
   </div>`
 });
 
-document.getElementById('random-link').innerHTML = `<i class="ph-bold ph-dice-${NUMS[Math.floor(Math.random()*NUMS.length)]}"></i>`
+document.getElementById('random-link').innerHTML = `<div class="icon-text" >
+  <i class="ph-bold ph-dice-${NUMS[current_link_index % NUMS.length]}"></i> 
+  <span>Roll the web dice</span>
+  </div>`

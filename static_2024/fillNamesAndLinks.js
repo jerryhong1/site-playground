@@ -11,21 +11,18 @@ const NAMES =
   },
   {
     name: 'Oscar Dumlao',
-    link: 'https://www.oscardumlao.com/',
-    comment: "generational"
+    link: 'https://www.oscardumlao.com/'
   },
   {
     name: 'Patrick Fenton',
     comment: 'ME 125 king',
   },
   {
-    name: 'David Kelley',
-    comment: 'needs no intro',
+    name: 'David Kelley'
   },
   {
     name: 'Joseph Zhang',
-    link: 'https://www.josephz.me/',
-    comment: 'soooo good!',
+    link: 'https://www.josephz.me/'
   },
   {
     name: 'My Family ♥︎',
@@ -52,8 +49,7 @@ const NAMES =
   },
   {
     name: "Yixiao Liu",
-    link: "https://twofourone.net/",
-    comment: 'intro\'d me to Neue Haas Grotesk'
+    link: "https://twofourone.net/"
   },
   {
     name: "Mika Isayama"
