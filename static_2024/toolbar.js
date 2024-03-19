@@ -555,7 +555,6 @@ RANDOM WEBPAGE
 
 let LINKS = 
 [
-  'https://www.youtube.com/watch?v=kMJCN_enTIg',
   'https://thatsmathematics.com/mathgen/',
   'https://www.youtube.com/watch?v=3GNG12g2bKw',
   'https://www.youtube.com/watch?v=KPeYYXDxyUg',
@@ -587,7 +586,7 @@ let LINKS =
   'https://refresh.study/',
   'https://rauterberg.employee.id.tue.nl/lecturenotes/APPLE-Guidelines-2005.pdf',
   'https://www.youtube.com/watch?v=70ML-MPjvNY',
-  'https://www.youtube.com/watch?v=RhjHAPw1q-M&list=FLKu9xHeDm5P0zEQU2C8YSpQ',
+  'https://www.youtube.com/watch?v=RhjHAPw1q-M',
   'https://www.youtube.com/watch?v=ci2bFFGM8T8',
   'https://www.youtube.com/watch?v=rzLIUgnKY40',
   'https://www.youtube.com/watch?v=SUtXMRuhQcM',
@@ -598,7 +597,7 @@ let LINKS =
   'https://mathigon.org/course/circles/spheres-cones-cylinders#sphere-maps',
   'https://symphosizer.wearecollins.com/',
   'https://seventeenpeople.com/',
-  'https://deck-24abcd.netlify.app/',
+  'https://poke-holo.simey.me/',
   'https://tixy.land/',
   'http://www.radicalcartography.net/',
   'https://reciprocal.ltd/',
@@ -616,7 +615,10 @@ let LINKS =
   'http://weavesilk.com/',
   'https://www.businessinsider.com/the-hedge-fund-presentation-on-olive-garden-is-a-masterpiece-2014-9',
   'https://imgur.com/gallery/bCqRp',
-  'https://plink.in/'
+  'https://plink.in/',
+  'https://peoplesgdarchive.org/',
+  'https://www.gameszap.com/arthur-games.html',
+  'https://archive.org/details/fwrrmarchive/FETCH.with.Ruff.Ruffman.S01E01.AMZN.WEB-DL.DD%2B2.0.mkv'
 ]
 let NUMS = ['one', 'two', 'three', 'four', 'five', 'six']
 let current_link_index = Math.floor(Math.random()*LINKS.length)

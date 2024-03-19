@@ -220,7 +220,7 @@ div.header {
 
 div.main {
   display: flex;
-  padding: 32px 40px 40px 40px;
+  padding: 32px 40px 60px 40px;
   flex-direction: column;
   align-items: flex-start;
   gap: 40px;
@@ -320,6 +320,7 @@ div.toolbar {
   backdrop-filter: blur(8px);
   animation: moveIn .6s ease forwards;
   animation-delay: 1.2s;
+  overflow-x: scroll;
 }
 
 
@@ -345,6 +346,7 @@ div.toolbar-item span {
   font-weight: 500;
   line-height: 18px; /* 150% */
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 div.toolbar-item i {
