@@ -13,7 +13,8 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
-    <body class="two-bgs">
+    <body>
+      <!-- TODO: i should have a dedicated div for svg, and then maniuplate it directly in theming-->
         <div class="header">
           <div class="name-and-nav">
             <h1>Jerry Hong</h1>
@@ -120,7 +121,11 @@
               <i class="ph-bold ph-dice-five"></i> 
             </div>
           </div>
-          <input type="checkbox" id="checkbox" />
+          <div class="toolbar-item clickable clickable-with-sound" id="theme-toggle">
+            <div class="icon-text" >
+              <i class="ph-bold ph-paint-brush"></i> 
+            </div>
+          </div>
         </div>
     </body>
     <script type='text/javascript'src='theming.js'></script>
