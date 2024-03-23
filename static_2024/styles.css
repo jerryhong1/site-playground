@@ -218,14 +218,14 @@ body {
 }
 
 /* Light Vector */
-body::after {
+div.svg-bg {
   content: "";
   display: block;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-image: url('assets/light.svg'); /* Initial background image */
   background-position: center center;
   background-repeat: no-repeat;
