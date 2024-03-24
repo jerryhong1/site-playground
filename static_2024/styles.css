@@ -55,6 +55,7 @@
   --toolbar-bg: rgba(10, 10, 10, 0.50);
   --toolbar-backdrop-filter: blur(8px);
   --sleep-animation: sleepBackground 10s linear forwards;
+  --sleep-animation-final-opacity: 0.2;
   --toolbar-item-bg: rgba(61, 61, 61, 0.40);
   --toolbar-item-disabled-color: #777;
   --toolbar-item-color: #AAA;
@@ -67,7 +68,7 @@
 
 /* THEME 2: purple */
 [data-theme="purple"] {
-  --bg-color: linear-gradient(113deg, #FBF9FD -9.64%, #F0F7FE 106.95%);
+  --bg-color: linear-gradient(113deg, #F4EAFD -9.64%, #E9F3FF 106.95%);
   --accent-color: #50228A;
   --title-text-color: rgba(0, 0, 0, 0.8);
   --heading-text-color: rgba(0, 0, 0, 0.7);
@@ -76,6 +77,7 @@
   --toolbar-bg: rgba(255, 255, 255, 0.7);
   --toolbar-backdrop-filter: blur(2px);
   --sleep-animation: none;
+  --sleep-animation-final-opacity: 1;
   --toolbar-item-bg: rgba(255, 255, 255, 0.5);
   --toolbar-item-disabled-color: #999;
   --toolbar-item-color: #555;
@@ -97,6 +99,7 @@
   --toolbar-bg: rgba(10, 10, 10);
   --toolbar-backdrop-filter: none;
   --sleep-animation: sleepBackground 10s linear forwards;
+  --sleep-animation-final-opacity: 0.2;
   --toolbar-item-bg: rgba(61, 61, 61, 0.40);
   --toolbar-item-disabled-color: #777;
   --toolbar-item-color: #AAA;
@@ -118,6 +121,7 @@
   --toolbar-bg: rgba(10, 10, 10);
   --toolbar-backdrop-filter: none;
   --sleep-animation: none;
+  --sleep-animation-final-opacity: 1;
   --toolbar-item-bg: rgba(61, 61, 61, 0.40);
   --toolbar-item-disabled-color: #777;
   --toolbar-item-color: #AAA;
@@ -166,7 +170,7 @@
     opacity: 1;
   }
   to {
-    opacity: 0.2;
+    opacity: var(--sleep-animation-final-opacity);
   }
 }
 
@@ -401,7 +405,7 @@ div.toolbar {
   display: flex;
   width: 100%;
   align-items: flex-start;
-  gap: 4px;
+  gap: 8px;
   background: var(--toolbar-bg);
   backdrop-filter: var(--toolbar-backdrop-filter);
   animation: moveIn .6s ease forwards;
