@@ -44,6 +44,94 @@
   font-style: normal;
 }
 
+/* THEME 1: ocean */
+:root {
+  --bg-color: #687D89;
+  --accent-color: #C6D184;
+  --title-text-color: rgba(255, 255, 255, 0.8);
+  --heading-text-color: rgba(255, 255, 255, 0.7);
+  --body-text-color: rgba(255, 255, 255, 0.5);
+  --border-color: rgba(255, 255, 255, 0.15);
+  --toolbar-bg: rgba(10, 10, 10, 0.50);
+  --toolbar-backdrop-filter: blur(8px);
+  --sleep-animation: sleepBackground 10s linear forwards;
+  --sleep-animation-final-opacity: 0.2;
+  --toolbar-item-bg: rgba(61, 61, 61, 0.40);
+  --toolbar-item-disabled-color: #777;
+  --toolbar-item-color: #AAA;
+  --highlight-text-color: #000;
+  --hover-a-color: hsla(0,0%,100%,.1);
+  --hover-button-disabled-color: rgba(255, 255, 255, 0.5);
+  --svg-color-start: #F3E4D2;
+  --svg-color-end: #DCDDB1;
+}
+
+/* THEME 2: purple */
+[data-theme="purple"] {
+  --bg-color: linear-gradient(113deg, #F4EAFD -9.64%, #E9F3FF 106.95%);
+  --accent-color: #50228A;
+  --title-text-color: rgba(0, 0, 0, 0.8);
+  --heading-text-color: rgba(0, 0, 0, 0.7);
+  --body-text-color: rgba(0, 0, 0, 0.7);
+  --border-color: rgba(0, 0, 0, 0.1);
+  --toolbar-bg: rgba(255, 255, 255, 0.7);
+  --toolbar-backdrop-filter: blur(2px);
+  --sleep-animation: none;
+  --sleep-animation-final-opacity: 1;
+  --toolbar-item-bg: rgba(255, 255, 255, 0.5);
+  --toolbar-item-disabled-color: #999;
+  --toolbar-item-color: #555;
+  --highlight-text-color: #FFF;
+  --hover-a-color: hsla(0,0%,0%,.1);
+  --hover-button-disabled-color: rgba(0, 0, 0, 0.5);
+  --svg-color-start: #BFAEF2;
+  --svg-color-end: #808EAB;
+}
+
+/* THEME 3: klein blue */
+[data-theme="klein-blue"] {
+  --bg-color: #002FA7;
+  --accent-color: #FFF;
+  --title-text-color: rgba(255, 255, 255, 0.9);
+  --heading-text-color: rgba(255, 255, 255, 0.8);
+  --body-text-color: rgba(255, 255, 255, 0.6);
+  --border-color: rgba(255, 255, 255, .15);
+  --toolbar-bg: rgba(10, 10, 10);
+  --toolbar-backdrop-filter: none;
+  --sleep-animation: sleepBackground 10s linear forwards;
+  --sleep-animation-final-opacity: 0.2;
+  --toolbar-item-bg: rgba(61, 61, 61, 0.40);
+  --toolbar-item-disabled-color: #777;
+  --toolbar-item-color: #AAA;
+  --highlight-text-color: #000;
+  --hover-a-color: hsla(0,0%,100%,.1);
+  --hover-button-disabled-color: rgba(255, 255, 255, 0.5);
+  --svg-color-start: #FFF;
+  --svg-color-end: #FFF;
+}
+
+/* THEME 4: paper */
+[data-theme="paper"] {
+  --bg-color: #F5F5F1;
+  --accent-color: #816D05;
+  --title-text-color: rgba(0, 0, 0, 0.8);
+  --heading-text-color: rgba(0, 0, 0, 0.7);
+  --body-text-color: rgba(0, 0, 0, 0.7);
+  --border-color: rgba(0, 0, 0, 0.1);
+  --toolbar-bg: rgba(10, 10, 10);
+  --toolbar-backdrop-filter: none;
+  --sleep-animation: none;
+  --sleep-animation-final-opacity: 1;
+  --toolbar-item-bg: rgba(61, 61, 61, 0.40);
+  --toolbar-item-disabled-color: #777;
+  --toolbar-item-color: #AAA;
+  --highlight-text-color: #FFF;
+  --hover-a-color: hsla(0,0%,0%,.1);
+  --hover-button-disabled-color: rgba(0, 0, 0, 0.5);
+  --svg-color-start: #7b7b7b;
+  --svg-color-end: #888888;
+}
+
 .ph-bold {
   font-size: 14px;
 }
@@ -64,19 +152,10 @@
   animation-delay: 0.7s;
 }
 
-/* @keyframes fadeInBackground {
-  from {
-    background-image: none;  // Initial state: no background image 
-  }
-  to {
-    background-image: url('light.svg'), none; /* SVG as a second background
-  }
-} 
-*/
-
+/* TODO: sleep background only works in ocean mode. The whole thing needs to change for a light mode where text starts from black... or i should just redo the sleep feature*/
 @keyframes sleepBackground {
   0% {
-    background-color: #687D89;
+    background-color: var(--bg-color);
   }
   50% {
     background-color: #282e31;
@@ -91,7 +170,7 @@
     opacity: 1;
   }
   to {
-    opacity: 0.2;
+    opacity: var(--sleep-animation-final-opacity);
   }
 }
 
@@ -100,7 +179,7 @@
 h1 {
   font-feature-settings: 'clig' off, 'liga' off;
   font-family: 'Neue Montreal', sans-serif;
-  color: rgba(255, 255, 255, 0.80);
+  color: var(--title-text-color);
   font-size: 22px;
   font-style: normal;
   font-weight: 500;
@@ -111,7 +190,7 @@ h1 {
 
 /* Subheadings, Titles */
 h2{
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--heading-text-color);
   font-feature-settings: 'clig' off, 'liga' off;
   font-family: 'Neue Montreal', sans-serif;
   font-size: 18px;
@@ -123,7 +202,7 @@ h2{
 
 /* Long text */
 p.large {
-  color: rgba(255, 255, 255, 0.80);
+  color: var(--heading-text-color);
   font-feature-settings: 'clig' off, 'liga' off;
   font-family: 'GT Super Text', serif;
   font-size: 17px;
@@ -135,7 +214,7 @@ p.large {
 }
 
 p.small {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--body-text-color);
   font-feature-settings: 'clig' off, 'liga' off;
   font-family: 'GT Super Text', serif;
   font-size: 15px;
@@ -149,7 +228,7 @@ p.small {
 p.decorative {
   font-feature-settings: 'clig' off, 'liga' off;
   font-family: 'JetBrains Mono', monospace;
-  color: rgba(255, 255, 255, 0.50);
+  color: var(--body-text-color);
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -172,14 +251,14 @@ body::before {
   z-index: -1;
 }
 
-/* Solid background */
+/* Solid background.*/
 body {
   display: flex;
   width: 100%;
   flex-direction: column;
   align-items: flex-start;
-  background: #687D89;
-  animation: sleepBackground 10s linear forwards;
+  background: var(--bg-color);
+  animation: var(--sleep-animation);
   animation-delay: 20s;
   min-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
@@ -188,23 +267,34 @@ body {
   padding-bottom: env(safe-area-inset-bottom); */
 }
 
-/* Light Vector */
-body::after {
+/* Grainy Vector */
+div.svg-bg {
   content: "";
   display: block;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background-image: url('assets/light.svg'); /* Initial background image */
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  height: 100vh;
+  overflow: hidden; 
+}
+
+.svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
   opacity: 0; /* Set the initial opacity to 0 */
   animation: fadeIn 2s ease forwards, sleepSVG 8s linear forwards; /* Use "forwards" to retain the final state */
   animation-delay: 1.2s, 20s;
-  z-index: -1;
+  height: auto; 
+}
+
+.svg path {
+  /* stroke: yellow; */
+  stroke-width: 101px; 
 }
 
 div.header {
@@ -215,7 +305,7 @@ div.header {
   /* align-items: flex-start; */
   gap: 10px;
   align-self: stretch;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid var(--border-color);
 }
 
 div.main {
@@ -315,14 +405,19 @@ div.toolbar {
   display: flex;
   width: 100%;
   align-items: flex-start;
-  gap: 4px;
-  background: rgba(10, 10, 10, 0.50);
-  backdrop-filter: blur(8px);
+  gap: 8px;
+  background: var(--toolbar-bg);
+  backdrop-filter: var(--toolbar-backdrop-filter);
   animation: moveIn .6s ease forwards;
   animation-delay: 1.2s;
   overflow-x: scroll;
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
 }
 
+.toolbar::-webkit-scrollbar {
+  display: none;
+}
 
 div.toolbar-item {
   display: flex;
@@ -330,8 +425,9 @@ div.toolbar-item {
   padding: 8px;
   align-items: center;
   gap: 16px;
-  background: rgba(61, 61, 61, 0.40);
+  background: var(--toolbar-item-bg);
   align-self: stretch;
+  white-space: nowrap;
 }
 
 div.toolbar-item:hover {
@@ -339,29 +435,28 @@ div.toolbar-item:hover {
 }
 
 div.toolbar-item span {
-  color: #AAA;
+  color: var(--toolbar-item-color);
   font-feature-settings: 'clig' off, 'liga' off;
   font-family: 'JetBrains Mono';
   font-size: 12px;
   font-weight: 500;
   line-height: 18px; /* 150% */
   text-transform: uppercase;
-  white-space: nowrap;
 }
 
 div.toolbar-item i {
-  color: #AAA;
+  color: var(--toolbar-item-color);
 }
 
 /* div.toolbar-disabled span div i { */
 div.toolbar-disabled span {
   cursor: default;
-  color: #777;
+  color: var(--toolbar-item-disabled-color);
 }
 
 div.toolbar-disabled div i {
   cursor: default;
-  color: #777;
+  color: var(--toolbar-item-disabled-color);
 }
 
 div.icon-text {
@@ -371,9 +466,9 @@ div.icon-text {
 }
 
 hr {
-  opacity: 0.15;
   background: #FFF;
-  height: 1px;
+  opacity: 10%;
+  height: .5px;
   margin: 0;
   width: 100%;
   border-style: outset;
@@ -391,21 +486,21 @@ a {
 }
 
 a.green {
-  color: #C6D184;
+  color: var(--accent-color);
   text-decoration: none;
 }
 
 a:hover {
   text-decoration: none;
   border-bottom: 1.5px dotted;
-  background-color: hsla(0,0%,100%,.1);
+  background-color: var(--hover-a-color);
 }
 
 a.green:hover {
   text-decoration: none;
   border-bottom: none;
-  background-color: #C6D184;
-  color: black;
+  background-color: var(--accent-color);
+  color: var(--highlight-text-color);
 }
 
 /* a.green:hover::after{
@@ -417,12 +512,12 @@ a:after {
 }
 
 span.subtle {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--body-text-color);
 }
 
 ::selection {
-  background-color: #C6D184;; 
-  color: #000; 
+  background-color: var(--accent-color);
+  color: var(--highlight-text-color); 
 }
 
 button.header {
@@ -434,7 +529,7 @@ button.header {
 
 button.header span {
   /* copied from h2 */
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--heading-text-color);
   font-feature-settings: 'clig' off, 'liga' off;
   font-family: 'Neue Montreal', sans-serif;
   font-size: 18px;
@@ -450,7 +545,7 @@ button.header:hover {
 
 button.disabled:hover::before {
   /* copied from h2 */
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--hover-button-disabled-color);
   font-feature-settings: 'clig' off, 'liga' off;
   font-family: 'Neue Montreal';
   font-size: 18px;

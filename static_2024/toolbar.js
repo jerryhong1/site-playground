@@ -640,3 +640,70 @@ document.getElementById('random-link').innerHTML = `<div class="icon-text" >
   <i class="ph-bold ph-dice-${NUMS[current_link_index % NUMS.length]}"></i> 
   <span>Roll the web dice</span>
   </div>`
+
+
+
+/***
+ THEMING
+
+ m   " m" " m  m
+   " m " "m   " " "m m m
+ "  m  " "  " "m" " " "m m
+m  m m "  " " " " "m"m"m"m"m"m
+  " m " " "m"m" "m"m"m"m"m"m"m"m
+"m"m m"m" "m m"m"m"m"m"m"m"m"m"m$"m
+     $  " "m"m"m"m"m"m"m"m"m"m$"  $m
+     "          "m"m"m"m"m"m$"  m"m"m
+     $           $"m"m"m"m$"  m"m"  "m
+    m"m          m  "m"m$"  m"m"     "m
+    $ $          $    $"  m"m"        "m
+     "           m    "$m"m"          m"m
+                m"m     $"          m"  $
+                $ $      $        m"  m"
+                "m"       $     m"  m$$
+                           $  m"  m$"  $
+                            $"  m""$    $
+                             """    $    $
+                                     $    $
+                                      $    $
+                                       $    $
+
+*/
+const THEMES = [
+  {
+    'css-name': 'ocean',
+    'name': 'Rayleigh'
+  },
+  {
+    'css-name': 'purple',
+    'name': 'Pastel Hoodie'
+  },
+  {
+    'css-name': 'klein-blue',
+    'name': 'Klein Blue'
+  },
+  {
+    'css-name': 'paper',
+    'name': 'Card Stock'
+  },
+]
+
+const themeToggle = document.getElementById('theme-toggle');
+let currentThemeIndex = parseInt(localStorage.getItem('theme-index') ? localStorage.getItem('theme-index') : '0');
+document.documentElement.setAttribute('data-theme', THEMES[currentThemeIndex]['css-name']);
+themeToggle.innerHTML = `<div class="icon-text" >
+  <i class="ph-bold ph-paint-brush"></i> 
+  <span>${THEMES[currentThemeIndex]['name']}</span>
+  </div>`
+
+let switchTheme = (e) => {
+  currentThemeIndex = (currentThemeIndex + 1) % THEMES.length;
+  document.documentElement.setAttribute('data-theme', THEMES[currentThemeIndex]['css-name']);
+  localStorage.setItem('theme-index', currentThemeIndex.toString());
+  themeToggle.innerHTML = `<div class="icon-text" >
+    <i class="ph-bold ph-paint-brush"></i> 
+    <span>${THEMES[currentThemeIndex]['name']}</span>
+    </div>`
+}
+
+themeToggle.addEventListener('click', switchTheme, false);

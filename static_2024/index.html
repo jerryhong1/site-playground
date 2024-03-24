@@ -13,7 +13,25 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
-    <body class="two-bgs">
+    <body>
+        <div class='svg-bg'>
+          <svg class='svg' viewBox="0 0 1139 631" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="strokeGradient" x1="1012" y1="-148.5" x2="77.5" y2="438.5" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="var(--svg-color-start)" stop-opacity="0.64"/>
+                <stop offset="1" stop-color="var(--svg-color-end)" stop-opacity="0"/>
+              </linearGradient>
+              <filter id="filter0_f_1987_4429" x="-151.611" y="-223.5" width="1397.37" height="853.873" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                <feGaussianBlur stdDeviation="24" result="effect1_foregroundBlur_1987_4429"/>
+              </filter>
+            </defs>
+            <g filter="url(#filter0_f_1987_4429)">
+              <path d="M557.649 69.606C713.624 36.0802 1070.59 22.923 1250.65 238.5M446.649 162.606C602.624 129.08 959.588 115.923 1139.65 331.5M335.649 250.606C491.849 217.08 849.328 203.923 1029.65 419.5M240.649 343.606C396.849 310.08 754.328 296.923 934.649 512.5M108.649 438.606C264.624 405.08 621.588 391.923 801.649 607.5M10.6494 544.606C166.624 511.08 523.588 497.923 703.649 713.5" stroke="url(#strokeGradient)" stroke-width="101"/>
+            </g>
+          </svg>
+        </div>
         <div class="header">
           <div class="name-and-nav">
             <h1>Jerry Hong</h1>
@@ -25,10 +43,15 @@
         </div>
         <div class="main fade-in-on-load">
           <p class="large" style="max-width: 500px;
-          align-self: stretch;">
+          align-self: stretch; margin-bottom: -30px;">
             I design interfaces and research the AI that will ultimately shape them. 
             I'm fascinated by malleable software, tools for thought, and the new modes of interaction artificial intelligence can offer. 
             I think systematically, pore over details, and cherish the people I build with.
+          </p>  
+          <p class="large" style="max-width: 500px;
+          align-self: stretch;">
+            For now, my work write-ups live on <a class="green" href="https://read.cv/jerry" target="_blank" rel="noreferrer noopener">Read.cv</a>.
+            But if you stuck around just to play a bit here, I wouldn't blame you.
           </p>  
           <hr class="half" />
           <div class="work-list">
@@ -118,6 +141,11 @@
           <div class="toolbar-item clickable clickable-with-sound" id="random-link">
             <div class="icon-text" >
               <i class="ph-bold ph-dice-five"></i> 
+            </div>
+          </div>
+          <div class="toolbar-item clickable clickable-with-sound" id="theme-toggle">
+            <div class="icon-text" >
+              <i class="ph-bold ph-paint-brush"></i> 
             </div>
           </div>
         </div>
