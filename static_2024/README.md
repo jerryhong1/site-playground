@@ -1,0 +1,1 @@
+I worked on this Jan 2024 - March 2024. It went live on the jerryhong-io repo 3/23/24. I'm gonna keep doing iterations of it there, though I may come back here to try adding react and backend and that shit. Consider this folder out of date.
