@@ -50,7 +50,7 @@
   --accent-color: #C6D184;
   --title-text-color: rgba(255, 255, 255, 0.8);
   --heading-text-color: rgba(255, 255, 255, 0.7);
-  --body-text-color: rgba(255, 255, 255, 0.7);
+  --body-text-color: rgba(255, 255, 255, 0.5);
   --border-color: rgba(255, 255, 255, 0.15);
   --toolbar-bg: rgba(10, 10, 10, 0.50);
   --toolbar-backdrop-filter: blur(8px);
@@ -61,6 +61,8 @@
   --highlight-text-color: #000;
   --hover-a-color: hsla(0,0%,100%,.1);
   --hover-button-disabled-color: rgba(255, 255, 255, 0.5);
+  --svg-color-start: #F3E4D2;
+  --svg-color-end: #DCDDB1;
 }
 
 /* THEME 2: purple */
@@ -74,12 +76,56 @@
   --toolbar-bg: rgba(255, 255, 255, 0.7);
   --toolbar-backdrop-filter: blur(2px);
   --sleep-animation: none;
-  --toolbar-item-bg: rgba(255, 255, 255, 0.70);
+  --toolbar-item-bg: rgba(255, 255, 255, 0.5);
   --toolbar-item-disabled-color: #999;
   --toolbar-item-color: #555;
   --highlight-text-color: #FFF;
   --hover-a-color: hsla(0,0%,0%,.1);
   --hover-button-disabled-color: rgba(0, 0, 0, 0.5);
+  --svg-color-start: #BFAEF2;
+  --svg-color-end: #808EAB;
+}
+
+/* THEME 3: klein blue */
+[data-theme="klein-blue"] {
+  --bg-color: #002FA7;
+  --accent-color: #FFF;
+  --title-text-color: rgba(255, 255, 255, 0.9);
+  --heading-text-color: rgba(255, 255, 255, 0.8);
+  --body-text-color: rgba(255, 255, 255, 0.6);
+  --border-color: rgba(255, 255, 255, .15);
+  --toolbar-bg: rgba(10, 10, 10);
+  --toolbar-backdrop-filter: none;
+  --sleep-animation: sleepBackground 10s linear forwards;
+  --toolbar-item-bg: rgba(61, 61, 61, 0.40);
+  --toolbar-item-disabled-color: #777;
+  --toolbar-item-color: #AAA;
+  --highlight-text-color: #000;
+  --hover-a-color: hsla(0,0%,100%,.1);
+  --hover-button-disabled-color: rgba(255, 255, 255, 0.5);
+  --svg-color-start: #FFF;
+  --svg-color-end: #FFF;
+}
+
+/* THEME 4: paper */
+[data-theme="paper"] {
+  --bg-color: #F5F5F1;
+  --accent-color: #816D05;
+  --title-text-color: rgba(0, 0, 0, 0.8);
+  --heading-text-color: rgba(0, 0, 0, 0.7);
+  --body-text-color: rgba(0, 0, 0, 0.7);
+  --border-color: rgba(0, 0, 0, 0.1);
+  --toolbar-bg: rgba(10, 10, 10);
+  --toolbar-backdrop-filter: none;
+  --sleep-animation: none;
+  --toolbar-item-bg: rgba(61, 61, 61, 0.40);
+  --toolbar-item-disabled-color: #777;
+  --toolbar-item-color: #AAA;
+  --highlight-text-color: #FFF;
+  --hover-a-color: hsla(0,0%,0%,.1);
+  --hover-button-disabled-color: rgba(0, 0, 0, 0.5);
+  --svg-color-start: #7b7b7b;
+  --svg-color-end: #888888;
 }
 
 .ph-bold {
@@ -217,7 +263,7 @@ body {
   padding-bottom: env(safe-area-inset-bottom); */
 }
 
-/* Light Vector */
+/* Grainy Vector */
 div.svg-bg {
   content: "";
   display: block;
@@ -226,14 +272,25 @@ div.svg-bg {
   left: 0;
   width: 100%;
   height: 100vh;
-  background-image: url('assets/light.svg'); /* Initial background image */
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  overflow: hidden; 
+}
+
+.svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
   opacity: 0; /* Set the initial opacity to 0 */
   animation: fadeIn 2s ease forwards, sleepSVG 8s linear forwards; /* Use "forwards" to retain the final state */
   animation-delay: 1.2s, 20s;
-  z-index: -1;
+  height: auto; 
+}
+
+.svg path {
+  /* stroke: yellow; */
+  stroke-width: 101px; 
 }
 
 div.header {
@@ -468,7 +525,7 @@ button.header {
 
 button.header span {
   /* copied from h2 */
-  color: var(--body-text-color);
+  color: var(--heading-text-color);
   font-feature-settings: 'clig' off, 'liga' off;
   font-family: 'Neue Montreal', sans-serif;
   font-size: 18px;

@@ -1,4 +1,4 @@
-const THEMES = ['ocean', 'purple']
+const THEMES = ['ocean', 'purple', 'klein-blue', 'paper']
 const themeToggle = document.getElementById('theme-toggle');
 let currentThemeIndex = parseInt(localStorage.getItem('theme-index') ? localStorage.getItem('theme-index') : '0');
 document.documentElement.setAttribute('data-theme', THEMES[currentThemeIndex]);
