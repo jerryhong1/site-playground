@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=400, initial-scale=1.0">
+  <title>Block Visualizer Prototype</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="controls">
+    <button id="play-btn">Play Music</button>
+    <button id="clear-btn">Clear Canvas</button>
+    <button id="download-btn">Download</button>
+    <input type="file" id="audio-file" accept="audio/*">
+    <label style="margin-left:12px;">Blend Mode:
+      <select id="blend-mode">
+        <option value="default" selected>Default</option>
+        <option value="multiply">Multiply</option>
+        <option value="soft-multiply">Soft Multiply</option>
+        <option value="screen">Screen</option>
+        <option value="average">Average</option>
+      </select>
+    </label>
+    <label id="soft-mult-label" style="display:none; margin-left:8px;">Multiply Strength:
+      <input type="range" id="soft-mult-slider" min="0" max="1" step="0.01" value="0.5">
+      <span id="soft-mult-value">0.5</span>
+    </label>
+  </div>
+  <div class="sliders">
+    <label>Bins: <input type="range" id="bins-slider" min="4" max="64" value="32"> <span id="bins-value">32</span></label>
+    <label>Max Height: <input type="range" id="height-slider" min="4" max="64" value="32"> <span id="height-value">32</span></label>
+    <label>Min Clamp: <input type="range" id="minval-slider" min="0" max="128" value="10"> <span id="minval-value">10</span></label>
+    <label>Max Clamp: <input type="range" id="maxval-slider" min="32" max="255" value="160"> <span id="maxval-value">160</span></label>
+    <label>Bass Base: <input type="range" id="bassbase-slider" min="0" max="2" step="0.01" value="0.5"> <span id="bassbase-value">0.5</span></label>
+    <label>Bass Boost: <input type="range" id="bassboost-slider" min="0" max="4" step="0.01" value="2.0"> <span id="bassboost-value">2.0</span></label>
+    <label>Min Freq Bin: <input type="range" id="minfreq-slider" min="0" max="31" value="0"> <span id="minfreq-value">0</span></label>
+    <label>Max Freq Bin: <input type="range" id="maxfreq-slider" min="1" max="63" value="31"> <span id="maxfreq-value">31</span></label>
+  </div>
+  <canvas id="block-canvas" width="800" height="800"></canvas>
+  <script type="module" src="blockVisualizer.js"></script>
+</body>
+</html> 
