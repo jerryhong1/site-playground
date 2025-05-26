@@ -410,8 +410,22 @@ function getCurrentShape() {
 }
 
 document.getElementById('download-btn').addEventListener('click', () => {
+  // Create a temporary canvas with white background
+  const tempCanvas = document.createElement('canvas');
+  tempCanvas.width = canvas.width;
+  tempCanvas.height = canvas.height;
+  const tempCtx = tempCanvas.getContext('2d');
+  
+  // Fill with white background
+  tempCtx.fillStyle = '#FFFFFF';
+  tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+  
+  // Draw the current canvas content on top
+  tempCtx.drawImage(canvas, 0, 0);
+  
+  // Create download link with the temporary canvas
   const link = document.createElement('a');
   link.download = 'music-stamp.png';
-  link.href = canvas.toDataURL('image/png');
+  link.href = tempCanvas.toDataURL('image/png');
   link.click();
 }); 
