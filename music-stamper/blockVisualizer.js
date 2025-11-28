@@ -12,10 +12,18 @@ let isShiftDown = false;
 let isPainting = false;
 let lastPaintTime = 0;
 const paintInterval = 20; // ms between smears (10x faster)
+let isDownloading = false; // Add flag for download state
+let lastFrameTime = 0;
+let lastFreqUpdateTime = 0;
+let frameInterval = 1000 / 30; // Default to 30fps
+let currentShape = Array(32).fill(0); // Store current shape
+let isMinified = true; // Start in minified mode
 
 // Slider elements
 const binsSlider = document.getElementById('bins-slider');
 const heightSlider = document.getElementById('height-slider');
+const minheightSlider = document.getElementById('minheight-slider');
+const tempfreqSlider = document.getElementById('tempfreq-slider');
 const minvalSlider = document.getElementById('minval-slider');
 const maxvalSlider = document.getElementById('maxval-slider');
 const bassbaseSlider = document.getElementById('bassbase-slider');
@@ -25,6 +33,8 @@ const maxfreqSlider = document.getElementById('maxfreq-slider');
 
 const binsValue = document.getElementById('bins-value');
 const heightValue = document.getElementById('height-value');
+const minheightValue = document.getElementById('minheight-value');
+const tempfreqValue = document.getElementById('tempfreq-value');
 const minvalValue = document.getElementById('minval-value');
 const maxvalValue = document.getElementById('maxval-value');
 const bassbaseValue = document.getElementById('bassbase-value');
@@ -34,14 +44,14 @@ const maxfreqValue = document.getElementById('maxfreq-value');
 
 // Pastel color palette (100% opacity)
 const pastelColors = [
-  '#ffd6e0', // pink
-  '#d6eaff', // blue
-  '#d6ffd6', // green
-  '#fff5d6', // yellow
-  '#e0d6ff', // purple
-  '#ffe6d6', // orange
-  '#d6fff6', // teal
-  '#f6d6ff', // lavender
+  '#ff9eb5', // deeper pink
+  '#9ec4ff', // deeper blue
+  '#9eff9e', // deeper green
+  '#ffe69e', // deeper yellow
+  '#b59eff', // deeper purple
+  '#ffb59e', // deeper orange
+  '#9effe6', // deeper teal
+  '#e69eff', // deeper lavender
 ];
 let colorIndex = 0;
 
@@ -58,6 +68,8 @@ canvas.style.background = '#FFF';
 function updateSliderDisplays() {
   binsValue.textContent = binsSlider.value;
   heightValue.textContent = heightSlider.value;
+  minheightValue.textContent = minheightSlider.value;
+  tempfreqValue.textContent = tempfreqSlider.value;
   minvalValue.textContent = minvalSlider.value;
   maxvalValue.textContent = maxvalSlider.value;
   bassbaseValue.textContent = bassbaseSlider.value;
@@ -66,7 +78,7 @@ function updateSliderDisplays() {
   maxfreqValue.textContent = maxfreqSlider.value;
 }
 
-[binsSlider, heightSlider, minvalSlider, maxvalSlider, bassbaseSlider, bassboostSlider, minfreqSlider, maxfreqSlider].forEach(slider => {
+[binsSlider, heightSlider, minheightSlider, tempfreqSlider, minvalSlider, maxvalSlider, bassbaseSlider, bassboostSlider, minfreqSlider, maxfreqSlider].forEach(slider => {
   slider.addEventListener('input', updateSliderDisplays);
   slider.addEventListener('input', () => { if (!animationId) draw(); });
 });
@@ -370,13 +382,25 @@ function rotateShape(shape) {
 }
 
 function draw() {
+  const now = performance.now();
+  
+  // Update frequency visualization at the specified rate
+  if (now - lastFreqUpdateTime >= frameInterval) {
+    currentShape = getCurrentShape();
+    lastFreqUpdateTime = now;
+  }
+  
+  // Always draw at full frame rate for smooth cursor tracking
   drawGrid();
-  // Draw the moving visualizer shape at the mouse position (snapped to grid)
-  let shape = getCurrentShape();
-  if (isShiftDown) shape = rotateShape(shape);
-  const snapX = Math.floor(mouseX / gridSize) * gridSize;
-  const snapY = Math.floor(mouseY / gridSize) * gridSize;
-  drawBlockShape(snapX, snapY, shape);
+  // Only draw hover state if not downloading and not minified
+  if (!isDownloading && !isMinified) {
+    let shape = currentShape;
+    if (isShiftDown) shape = rotateShape(shape);
+    const snapX = Math.floor(mouseX / gridSize) * gridSize;
+    const snapY = Math.floor(mouseY / gridSize) * gridSize;
+    drawBlockShape(snapX, snapY, shape);
+  }
+  
   animationId = requestAnimationFrame(draw);
 }
 
@@ -388,29 +412,46 @@ function getCurrentShape() {
   const minVal = Number(minvalSlider.value);
   const maxVal = Number(maxvalSlider.value);
   const maxBlocks = Number(heightSlider.value);
+  const minHeight = Number(minheightSlider.value);
   const bassBase = Number(bassbaseSlider.value);
   const bassBoost = Number(bassboostSlider.value);
   const minFreq = Number(minfreqSlider.value);
   const maxFreq = Number(maxfreqSlider.value);
-  const freqRange = maxFreq - minFreq;
+  
+  // Log frequency bin mappings
+  console.log('Frequency bin mappings:');
+  console.log('Min freq bin:', minFreq, 'Max freq bin:', maxFreq);
+  console.log('Number of bins:', bins);
+  
+  // Use logarithmic mapping for frequency bins
   for (let i = 0; i < bins; i++) {
-    // Map frequency bins to our shape columns, within selected range
-    const binIdx = minFreq + Math.floor(i * freqRange / bins);
+    // Map i to a logarithmic position between minFreq and maxFreq
+    const t = i / (bins - 1);
+    const logMin = Math.log2(minFreq + 1); // +1 to avoid log(0)
+    const logMax = Math.log2(maxFreq + 1);
+    const logPos = logMin + t * (logMax - logMin);
+    const binIdx = Math.floor(Math.pow(2, logPos) - 1);
+    
+    if (i === 0 || i === bins - 1 || i % 8 === 0) { // Log every 8th bin to avoid spam
+      console.log(`Bin ${i}: maps to frequency bin ${binIdx} (t=${t.toFixed(2)}, logPos=${logPos.toFixed(2)})`);
+    }
+    
     let magnitude = dataArray[binIdx];
     // More aggressive normalization: cubic boost for treble
-    const t = i / (bins - 1);
     const norm = bassBase + bassBoost * Math.pow(t, 2.5); // Stronger boost for high bins
     magnitude = magnitude * norm;
     // Clamp and linearly interpolate
     let height = (magnitude - minVal) / (maxVal - minVal) * maxBlocks;
     height = Math.max(0, Math.min(maxBlocks, height));
+    // Add minimum height
+    height = Math.min(maxBlocks, height + minHeight);
     shape[i] = Math.round(height);
   }
   return shape;
 }
 
 document.getElementById('download-btn').addEventListener('click', () => {
-  // Create a temporary canvas with white background
+  // Create a fresh canvas
   const tempCanvas = document.createElement('canvas');
   tempCanvas.width = canvas.width;
   tempCanvas.height = canvas.height;
@@ -420,12 +461,75 @@ document.getElementById('download-btn').addEventListener('click', () => {
   tempCtx.fillStyle = '#FFFFFF';
   tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
   
-  // Draw the current canvas content on top
-  tempCtx.drawImage(canvas, 0, 0);
+  // Draw only the grid cells (stamped blocks)
+  for (let gx = 0; gx < gridCells.length; gx++) {
+    for (let gy = 0; gy < gridCells[0].length; gy++) {
+      const color = gridCells[gx][gy];
+      if (color) {
+        tempCtx.fillStyle = color;
+        tempCtx.fillRect(gx * gridSize, gy * gridSize, gridSize, gridSize);
+      }
+    }
+  }
   
-  // Create download link with the temporary canvas
+  // Draw grid lines
+  tempCtx.strokeStyle = '#eee';
+  for (let x = 0; x <= tempCanvas.width; x += gridSize) {
+    tempCtx.beginPath();
+    tempCtx.moveTo(x, 0);
+    tempCtx.lineTo(x, tempCanvas.height);
+    tempCtx.stroke();
+  }
+  for (let y = 0; y <= tempCanvas.height; y += gridSize) {
+    tempCtx.beginPath();
+    tempCtx.moveTo(0, y);
+    tempCtx.lineTo(tempCanvas.width, y);
+    tempCtx.stroke();
+  }
+  
+  // Create download link
   const link = document.createElement('a');
   link.download = 'music-stamp.png';
-  link.href = tempCanvas.toDataURL('image/png');
+  link.href = tempCanvas.toDataURL('image/png', { alpha: false });
   link.click();
+});
+
+// Modify only the frequency update rate
+function updateFrameRate() {
+  const fps = Number(tempfreqSlider.value);
+  frameInterval = 1000 / fps; // Convert Hz to milliseconds
+  console.log('Temporal frequency slider value:', tempfreqSlider.value);
+  console.log('Updated frequency rate:', fps, 'Hz (', frameInterval.toFixed(2), 'ms per update)');
+}
+
+// Add direct logging to verify slider changes
+tempfreqSlider.addEventListener('input', () => {
+  console.log('Temporal frequency slider changed to:', tempfreqSlider.value);
+  updateFrameRate();
+});
+
+updateFrameRate(); // Set initial value
+
+// Add logging to slider changes
+[binsSlider, minfreqSlider, maxfreqSlider].forEach(slider => {
+  slider.addEventListener('input', () => {
+    console.log('Slider changed:', slider.id);
+    console.log('Current values:');
+    console.log('Bins:', binsSlider.value);
+    console.log('Min freq:', minfreqSlider.value);
+    console.log('Max freq:', maxfreqSlider.value);
+  });
+});
+
+const canvasContainer = document.getElementById('canvas-container');
+canvasContainer.addEventListener('click', () => {
+  if (canvasContainer.classList.contains('minified')) {
+    canvasContainer.classList.remove('minified');
+    canvasContainer.classList.add('expanded');
+    isMinified = false;
+  } else {
+    canvasContainer.classList.remove('expanded');
+    canvasContainer.classList.add('minified');
+    isMinified = true;
+  }
 }); 

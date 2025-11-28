@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Shader Playground | Jerry Hong</title>
+    <link rel="stylesheet" type="text/css" href="styles/themes.css" />
+    <link rel="stylesheet" type="text/css" href="styles/shader.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body data-theme="terminal">
+    <div class="playground-container">
+      <!-- Header -->
+      <header class="playground-header">
+        <h1>Shader Playground</h1>
+      </header>
+
+      <!-- Test Content Area -->
+      <div class="test-content">
+        <div class="content-grid">
+          <!-- Text samples -->
+          <div class="content-block">
+            <h2>Typography Test</h2>
+            <p class="large">Large text with <span class="accent">accent colors</span> and varying weights.</p>
+            <p>Regular paragraph text that should distort beautifully under the liquid glass effect.</p>
+            <p class="small">Small text might create interesting aberration patterns.</p>
+          </div>
+
+          <!-- SVG sample -->
+          <div class="content-block">
+            <svg class="test-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:rgb(255,100,100);stop-opacity:1" />
+                  <stop offset="50%" style="stop-color:rgb(100,255,100);stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:rgb(100,100,255);stop-opacity:1" />
+                </linearGradient>
+              </defs>
+              <circle cx="100" cy="100" r="80" fill="url(#grad1)" />
+              <circle cx="100" cy="100" r="50" fill="rgba(255,255,255,0.3)" />
+              <circle cx="100" cy="100" r="20" fill="rgba(0,0,0,0.5)" />
+            </svg>
+          </div>
+
+          <!-- Image sample -->
+          <div class="content-block">
+            <div class="test-image gradient-box">
+              <div class="gradient-text">Gradient Box</div>
+            </div>
+          </div>
+
+          <!-- Pattern sample -->
+          <div class="content-block pattern-block">
+            <div class="checkerboard"></div>
+          </div>
+
+          <!-- More text -->
+          <div class="content-block">
+            <h3>Detailed Text Block</h3>
+            <p>The liquid glass shader uses WebGL to create a lens-like refraction effect. It captures the page content as a texture and applies mathematical transforms to simulate light bending through a curved surface.</p>
+            <ul>
+              <li>Refraction simulation</li>
+              <li>Edge highlighting</li>
+              <li>Blur falloff</li>
+              <li>Inner shadows</li>
+            </ul>
+          </div>
+
+          <!-- Color blocks -->
+          <div class="content-block color-grid">
+            <div class="color-box" style="background: #FF6B6B"></div>
+            <div class="color-box" style="background: #4ECDC4"></div>
+            <div class="color-box" style="background: #45B7D1"></div>
+            <div class="color-box" style="background: #FFA07A"></div>
+            <div class="color-box" style="background: #98D8C8"></div>
+            <div class="color-box" style="background: #F7DC6F"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Control Panel -->
+      <div class="control-panel">
+        <div class="panel-section">
+          <h3>Effect Type</h3>
+          <div class="button-group">
+            <button id="effect-glass" class="active">Liquid Glass</button>
+            <button id="effect-chromatic">Chromatic</button>
+            <button id="effect-ripple">Ripple</button>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3>Glass Parameters</h3>
+          <div class="control-group">
+            <label>
+              Lens Size: <span id="lens-size-value">120</span>px
+              <input type="range" id="lens-size" min="50" max="300" value="120" />
+            </label>
+          </div>
+          <div class="control-group">
+            <label>
+              Intensity: <span id="intensity-value">0.7</span>
+              <input type="range" id="intensity" min="0" max="1" step="0.1" value="0.7" />
+            </label>
+          </div>
+          <div class="control-group">
+            <label>
+              Refraction Strength: <span id="refract-value">0.25</span>
+              <input type="range" id="refract-strength" min="0" max="0.5" step="0.01" value="0.25" />
+            </label>
+          </div>
+          <div class="control-group">
+            <label>
+              Edge Blur: <span id="blur-value">0.003</span>
+              <input type="range" id="blur-amount" min="0" max="0.01" step="0.001" value="0.003" />
+            </label>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3>Actions</h3>
+          <div class="button-group vertical">
+            <button id="toggle-effect">Enable Effect</button>
+            <button id="recapture">Recapture Background</button>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3>Keyboard Shortcuts</h3>
+          <div class="shortcuts">
+            <div><kbd>Space</kbd> Toggle effect</div>
+            <div><kbd>1/2/3</kbd> Switch effects</div>
+            <div><kbd>R</kbd> Recapture</div>
+            <div><kbd>+/-</kbd> Adjust intensity</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="js/shaderPlayground.js"></script>
+  </body>
+</html>

@@ -29,6 +29,8 @@
   <div class="sliders">
     <label>Bins: <input type="range" id="bins-slider" min="4" max="64" value="32"> <span id="bins-value">32</span></label>
     <label>Max Height: <input type="range" id="height-slider" min="4" max="64" value="32"> <span id="height-value">32</span></label>
+    <label>Min Height: <input type="range" id="minheight-slider" min="0" max="32" value="0"> <span id="minheight-value">0</span></label>
+    <label>Temporal Freq: <input type="range" id="tempfreq-slider" min="1" max="60" value="30"> <span id="tempfreq-value">30</span></label>
     <label>Min Clamp: <input type="range" id="minval-slider" min="0" max="128" value="10"> <span id="minval-value">10</span></label>
     <label>Max Clamp: <input type="range" id="maxval-slider" min="32" max="255" value="160"> <span id="maxval-value">160</span></label>
     <label>Bass Base: <input type="range" id="bassbase-slider" min="0" max="2" step="0.01" value="0.5"> <span id="bassbase-value">0.5</span></label>
@@ -36,7 +38,9 @@
     <label>Min Freq Bin: <input type="range" id="minfreq-slider" min="0" max="31" value="0"> <span id="minfreq-value">0</span></label>
     <label>Max Freq Bin: <input type="range" id="maxfreq-slider" min="1" max="63" value="31"> <span id="maxfreq-value">31</span></label>
   </div>
-  <canvas id="block-canvas" width="800" height="800"></canvas>
+  <div id="canvas-container" class="minified">
+    <canvas id="block-canvas" width="800" height="800"></canvas>
+  </div>
   <script type="module" src="blockVisualizer.js"></script>
 </body>
 </html> 
